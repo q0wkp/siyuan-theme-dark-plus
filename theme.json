@@ -1,8 +1,8 @@
 {
-  "name": "Dark+",
-  "author": "Zuoqiu Yingyi",
-  "url": "https://github.com/Zuoqiu-Yingyi/siyuan-theme-dark-plus",
-  "version": "2.0.4",
+  "name": "Dark+ (Modified)",
+  "author": "Zuoqiu Yingyi, q0wkp",
+  "url": "https://github.com/q0wkp/siyuan-theme-dark-plus",
+  "version": "2.1.0",
   "minAppVersion": "3.1.17",
   "keywords": [
     "暗",
@@ -38,17 +38,12 @@
     "zh_CHT": "這是一款多功能雙模式主題"
   },
   "readme": {
-    "default": "README.md",
-    "zh_CN": "README_zh_CN.md",
-    "zh_CHT": "README_zh_CN.md"
+    "default": "README.md"
   },
   "funding": {
     "openCollective": "",
     "patreon": "",
     "github": "",
-    "custom": [
-      "https://afdian.com/a/zuoqiu",
-      "https://ko-fi.com/zuoqiu"
-    ]
+    "custom": []
   }
 }
