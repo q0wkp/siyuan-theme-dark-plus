@@ -10,14 +10,13 @@
 ```
 ├── theme.json          # 主题元数据（版本、语言、模式）
 ├── theme.js            # JS 入口：初始化 window.theme，加载所有功能模块
-├── theme.less          # 样式入口：通过 .import-module() 导入所有 CSS 模块
-├── theme.css           # 编译后的 CSS（由 theme.less 生成）
+├── theme.css           # 样式入口：通过 @import url() 导入所有 CSS 模块
 ├── style/
 │   ├── config/
-│   │   ├── config.less/css  # 全局 CSS 自定义属性（200+），Office 标准/主题色
-│   │   ├── dark.less/css    # 暗色模式配色
-│   │   └── light.less/css   # 亮色模式配色
-│   ├── module/              # 87+ 样式模块（每个 .less 对应一个 .css）
+│   │   ├── config.css       # 全局 CSS 自定义属性（200+），Office 标准/主题色
+│   │   ├── dark.css         # 暗色模式配色
+│   │   └── light.css        # 亮色模式配色
+│   ├── module/              # 87+ 样式模块（纯 CSS）
 │   │   ├── block-*.css      # 块级元素样式（代码块、表格、列表等）
 │   │   ├── span-*.css       # 行内元素样式（链接、标记、标签等）
 │   │   ├── custom-*.css     # 自定义块属性样式（看板、字体、弹幕等）
@@ -66,21 +65,21 @@
 └── static/                  # 静态资源
 ```
 
-## 技术栈与构建
+## 技术栈
 
-- **样式**: LESS → CSS，源文件和编译产物并存于仓库
+- **样式**: 纯 CSS，无预处理器，直接编辑 `.css` 文件即可
 - **脚本**: 原生 ES Module（无打包工具、无 npm）
-- **无构建系统**: 直接编辑 .less/.js 文件即可；LESS 文件需手动编译为同名 .css
-- **版本缓存**: URL 参数 `?v=版本号` 实现缓存控制
+- **无构建系统**: 修改后即生效，无需编译
+- **版本缓存**: theme.css 中通过 URL 参数 `?v=版本号` 实现缓存控制
 
 ## 关键约定
 
 ### 样式修改
 
-1. **同时修改 .less 和 .css**: 每个样式模块都有 `.less`（源）和 `.css`（产物）两个文件，修改时两者都要更新
-2. **新增样式模块**: 在 `style/module/` 下创建 `.less` + `.css`，然后在 `theme.less` 中添加 `.import-module()` 调用
-3. **CSS 自定义属性**: 全局变量定义在 `style/config/config.less`，色彩变量分别在 `dark.less` 和 `light.less`
-4. **自定义块属性样式**: 文件名格式 `custom-{属性名}.less/css`，通过 `[custom-{name}="value"]` 属性选择器匹配
+1. **直接编辑 CSS**: 所有样式文件都是纯 `.css`，直接修改即可
+2. **新增样式模块**: 在 `style/module/` 下创建 `.css` 文件，然后在 `theme.css` 中添加 `@import url("style/module/xxx.css?v=版本号");`
+3. **CSS 自定义属性**: 全局变量定义在 `style/config/config.css`，色彩变量分别在 `dark.css` 和 `light.css`
+4. **自定义块属性样式**: 文件名格式 `custom-{属性名}.css`，通过 `[custom-{name}="value"]` 属性选择器匹配
 5. **主题模式**: 通过 `html[data-theme-mode="dark"]` / `html[data-theme-mode="light"]` 区分
 
 ### 脚本修改
@@ -101,11 +100,11 @@
 
 修改版本号时需同步更新：
 - `theme.json` 中的 `version` 字段
-- `theme.less` 中的 `@theme-version` 变量
+- `theme.css` 中所有 `@import url()` 的 `?v=` 参数
 
 ## 用户自定义入口
 
-- 样式覆盖: `<工作空间>/data/widgets/custom.css`（被 theme.less 最后导入）
+- 样式覆盖: `<工作空间>/data/widgets/custom.css`（被 theme.css 最后导入）
 - 模式样式: `custom-light.css` / `custom-dark.css`（在 theme.js 中按模式加载）
 
 ## 多语言
