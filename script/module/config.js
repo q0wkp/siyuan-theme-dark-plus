@@ -110,7 +110,7 @@ const config = {
                 enable: false, // 是否启用保存自定义样式
             },
             itemtext: {
-                enable: true, // 是否完整显示文本内容
+                enable: false, // 是否完整显示文本内容
                 toolbar: {
                     enable: true,
                     display: true,
@@ -159,7 +159,7 @@ const config = {
                 },
             },
             guides: {
-                enable: true, // 是否启用辅助样式
+                enable: false, // 是否启用辅助样式
                 toolbar: { // 菜单栏
                     enable: true,
                     display: true,
@@ -333,13 +333,13 @@ const config = {
                 enable: true, // 是否启用 iframe/widgets/video 全屏
             },
             mark: {
-                enable: true, // 是否开启双击块标全屏某个块
+                enable: false, // 是否开启双击块标全屏某个块
             },
         },
         doc: {
             enable: true, // 是否启用文档扩展功能
             heading: { // 标题操作
-                enable: true, // 是否启用标题操作
+                enable: false, // 是否启用标题操作
                 fold: {
                     enable: true, // 是否启用一键全部折叠
                     toolbar: { // 菜单栏
@@ -398,7 +398,7 @@ const config = {
                 },
             },
             outline: {
-                enable: true, // 是否启用当前文档大纲复制功能
+                enable: false, // 是否启用当前文档大纲复制功能
                 ial: { // 列表块属性, 用于设置渲染样式, 为空则为默认样式
                     // 'custom-type': 'map', // 脑图视图
                     // 'custom-type': 'table', // 表格视图
@@ -503,7 +503,7 @@ const config = {
                 },
             },
             delete: {
-                enable: true, // 是否启用当前文档全文删除功能
+                enable: false, // 是否启用当前文档全文删除功能
                 toolbar: { // 菜单栏
                     enable: false,
                     display: true,
@@ -519,7 +519,7 @@ const config = {
                 },
             },
             cut: {
-                enable: true, // 是否启用当前文档全文剪切功能
+                enable: false, // 是否启用当前文档全文剪切功能
                 toolbar: { // 菜单栏
                     enable: false,
                     display: true,
@@ -641,7 +641,7 @@ const config = {
                 enable: true, // 是否启用背景图片更改功能
                 propertyName: '--custom-background-image', // CSS 全局变量名称
                 web: {
-                    enable: true, // 网络背景图片
+                    enable: false, // 网络背景图片
                     toolbar: { // 菜单栏
                         enable: true,
                         display: true,
@@ -724,7 +724,7 @@ const config = {
             },
         },
         window: {
-            enable: true, // 窗口功能开关
+            enable: false, // 窗口功能开关
             windowParams: {
                 // 窗口参数
                 width: 720, // 窗口宽度
@@ -950,7 +950,7 @@ const config = {
             },
         },
         location: {
-            enable: true, // 浏览位置开关
+            enable: false, // 浏览位置开关
             slider: {
                 enable: true, // 滑块功能开关
                 follow: {
@@ -1016,7 +1016,7 @@ const config = {
             },
         },
         dock: {
-            enable: true, // dock 功能开关
+            enable: false, // dock 功能开关
             fold: {
                 enable: true, // dock 收缩/展开功能面板功能开关
                 dock: false, // 模式开启时是否同时收起侧边停靠栏
@@ -2905,7 +2905,7 @@ const config = {
             style: {
                 render: {
                     // 渲染(Ctrl + F1)
-                    enable: true,
+                    enable: false,
                     CtrlCmd: true,
                     WinCtrl: false,
                     Shift: false,
@@ -2963,7 +2963,7 @@ const config = {
             blockattrs: {
                 set: {
                     // 设置块属性(Ctrl + 鼠标中键)
-                    enable: true,
+                    enable: false,
                     CtrlCmd: true,
                     WinCtrl: false,
                     Shift: false,
@@ -2974,7 +2974,7 @@ const config = {
             reload: {
                 window: {
                     // 刷新当前窗口(Ctrl + F5)
-                    enable: true,
+                    enable: false,
                     CtrlCmd: true,
                     WinCtrl: false,
                     Shift: false,
@@ -3003,7 +3003,7 @@ const config = {
                 },
                 mark: {
                     // 全屏指定块 (双击块标)
-                    enable: true,
+                    enable: false,
                     CtrlCmd: false,
                     WinCtrl: false,
                     Shift: false,
@@ -3136,7 +3136,7 @@ const config = {
                     block: {
                         outfocus: { // @deprecated
                             // 新窗口打开当前块, 否则打开当前文档(Shift + Alt + N)
-                            enable: true,
+                            enable: false,
                             CtrlCmd: false,
                             WinCtrl: false,
                             Shift: true,
@@ -3145,7 +3145,7 @@ const config = {
                         },
                         infocus: { // @deprecated
                             // 新窗口打开当前块并聚焦, 否则打开当前文档(Ctrl + Shift + Alt + N)
-                            enable: true,
+                            enable: false,
                             CtrlCmd: true,
                             WinCtrl: false,
                             Shift: true,
@@ -3208,7 +3208,7 @@ const config = {
                 slider: {
                     goto: {
                         // 跳转到上次浏览位置(鼠标右键单击块滚动条)
-                        enable: true,
+                        enable: false,
                         CtrlCmd: false,
                         WinCtrl: false,
                         Shift: false,
@@ -3227,7 +3227,7 @@ const config = {
                 },
                 update: {
                     // 更新当前浏览位置(double-click)
-                    enable: true,
+                    enable: false,
                     CtrlCmd: false,
                     WinCtrl: false,
                     Shift: false,
