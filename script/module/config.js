@@ -628,13 +628,22 @@ const config = {
             },
         },
         background: {
-            // 背景图片功能开关
+            // 背景功能开关 | Background feature toggle
             enable: true,
-            color: {
-                propertyName: '--custom-background-color', // CSS 全局变量名称
-                default: { // 背景图片为空时的默认背景颜色
-                    light: 'white',
-                    dark: 'black',
+            // 图片背景模式下的默认半透明颜色（hard-coded）
+            // 这些值独立于 dark.css / light.css，确保切换为图片背景时始终使用半透明叠加
+            // | Default semi-transparent colors for image background mode (hard-coded)
+            // | Independent from dark.css / light.css so image backgrounds always show through
+            defaults: {
+                dark: {
+                    editor: '#222C',  // --custom-transparent
+                    panel: '#222D',   // --custom-transparent-deep
+                    dialog: '#222C',  // --custom-transparent
+                },
+                light: {
+                    editor: '#EEEC',  // --custom-transparent
+                    panel: '#EEEE',   // --custom-transparent-deeper
+                    dialog: '#EEEE',  // --custom-transparent-deeper
                 },
             },
             image: {
@@ -661,7 +670,6 @@ const config = {
                             'https://source.unsplash.com/random/1920x1080/?bright',
                             'https://api.dujin.org/bing/1920.php',
                             'https://unsplash.it/1920/1080?random',
-                            // 'https://api.ixiaowai.cn/gqapi/gqapi.php⁠⁠⁠⁠⁠⁠',
                         ],
                         dark: [ // 随机暗色背景图片 URL
                             'https://source.unsplash.com/random/1920x1080/?night',
@@ -698,26 +706,35 @@ const config = {
                     },
                     random: false, // 是否随机选择自定义背景图片
                     default: false, // 是否默认使用自定义背景图片
-                    landscape: { // 横屏背景图片
-                        light: [ // 自定义亮色背景图片 URL 列表
-                            null, // 纯白色背景
-                            `${THEME_PATHNAME}/image/light/background-main.jpg`,
-                            `${THEME_PATHNAME}/image/light/background-dialog.jpg`,
+                    landscape: { // 横屏背景 | Landscape background
+                        // 条目类型 | Entry types:
+                        //   null — 恢复 CSS 默认 | Restore CSS default
+                        //   string — 图片路径或纯色（半透明叠加）| Image path or color (transparent overlay)
+                        //   { background, panel?, editor?, dialog? } — 设置背景，可选覆盖面板/编辑区/对话框
+                        //     省略的 key 保持 CSS 默认（半透明叠加）| Omitted keys fall back to CSS default
+                        light: [ // 自定义亮色背景列表 | Custom light background list
+                            { background: 'var(--b3-theme-surface)' }, // 仅换背景，面板/编辑区半透明 | Background only
+                            { background: '#ffffff', panel: '#f0f0f0', editor: '#ffffff' }, // 全指定 | All specified
+                            { background: '#f0f8ff', editor: '#ffffff' }, // 省略 panel（半透明）| Panel omitted
+                            null, // 恢复默认 | Restore default
                         ],
-                        dark: [ // 自定义暗色背景图片 URL 列表
-                            null, // 纯黑色背景
-                            `${THEME_PATHNAME}/image/dark/background-main.jpg`,
-                            `${THEME_PATHNAME}/image/dark/background-dialog.jpg`,
+                        dark: [ // 自定义暗色背景列表 | Custom dark background list
+                            { background: 'var(--b3-theme-background)' }, // 仅换背景 | Background only
+                            { background: '#1e1e1e', panel: '#252525', editor: '#262626' }, // 全指定 | All specified
+                            { background: '#1a1a2e', editor: '#22223a' }, // 省略 panel（半透明）| Panel omitted
+                            null, // 恢复默认 | Restore default
                         ],
                     },
-                    portrait: { // 竖屏背景图片
-                        light: [ // 自定义亮色背景图片 URL 列表
-                            `${THEME_PATHNAME}/image/light/background-main-portrait.jpg`,
-                            `${THEME_PATHNAME}/image/light/background-dialog.jpg`,
+                    portrait: { // 竖屏背景 | Portrait background
+                        light: [ // 自定义亮色背景列表 | Custom light background list
+                            { background: 'var(--b3-theme-surface)' }, // 仅换背景 | Background only
+                            { background: '#ffffff', panel: '#f0f0f0', editor: '#ffffff' }, // 全指定 | All specified
+                            null, // 恢复默认 | Restore default
                         ],
-                        dark: [ // 自定义暗色背景图片 URL 列表
-                            `${THEME_PATHNAME}/image/dark/background-main-portrait.jpg`,
-                            `${THEME_PATHNAME}/image/dark/background-dialog.jpg`,
+                        dark: [ // 自定义暗色背景列表 | Custom dark background list
+                            { background: 'var(--b3-theme-background)' }, // 仅换背景 | Background only
+                            { background: '#1e1e1e', panel: '#252525', editor: '#262626' }, // 全指定 | All specified
+                            null, // 恢复默认 | Restore default
                         ],
                     },
                 },

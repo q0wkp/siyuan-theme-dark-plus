@@ -10,7 +10,6 @@ html,
   background-position: var(--custom-background-position);
   background-repeat: var(--custom-background-repeat);
   background-size: var(--custom-background-size);
-  background-color: var(--custom-background-color);
 }
 body {
   border: none;
