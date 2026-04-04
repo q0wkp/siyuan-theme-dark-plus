@@ -4,10 +4,18 @@
   background-color: var(--custom-editor-background-color);
   backdrop-filter: var(--custom-backdrop-filter);
 }
-#editor,
-.layout-tab-container {
+#editor {
   /* 编辑区 */
   background-color: var(--custom-editor-background-color);
+}
+.layout__center .layout-tab-container {
+  /* 编辑区内的面板 */
+  background-color: var(--custom-editor-background-color);
+}
+.layout__dockl .layout-tab-container,
+.layout__dockr .layout-tab-container {
+  /* 侧边栏面板 */
+  background-color: var(--custom-panel-background-color);
 }
 #sidebarContainer,
 .protyle {

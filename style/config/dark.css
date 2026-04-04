@@ -4,10 +4,10 @@
   /* 全局背景透明颜色 | Global background transparent color */
   --custom-background-transparent-color: rgba(0, 0, 0, 0.125);
   /* 背景图片 */
-  --custom-background-image-landscape: url(/appearance/themes/Dark+/image/dark/background-main.jpg);
-  --custom-background-image-portrait: url(/appearance/themes/Dark+/image/dark/background-main-portrait.jpg);
+  --custom-background-image-landscape: linear-gradient(var(--b3-theme-background), var(--b3-theme-background));
+  --custom-background-image-portrait: var(--custom-background-image-landscape);
   /* 对话框背景图片 */
-  --custom-background-image-dialog: url(/appearance/themes/Dark+/image/dark/background-dialog.jpg);
+  --custom-background-image-dialog: unset;
   /* 标签图标 | The icon of tag */
   --custom-span-tag-icon: url(/appearance/themes/Dark+/icon/tag.svg);
   /* 块引用波浪线动画图标 | The icon of wavy line animation */
@@ -27,8 +27,12 @@
   --custom-striking-color: #ff9632;
   /* 编辑区背景颜色 | The background color of the edit area */
   --custom-editor-background-color: var(--custom-transparent);
+  /* 侧边面板背景颜色 | The background color of the side panel */
+  --custom-panel-background-color: var(--custom-transparent-deep);
   /* 弹出窗口背景颜色 | The background color of the popover */
-  --custom-popover-background-color: var(--custom-editor-background-color);
+  --custom-popover-background-color: var(--custom-transparent);
+  /* 对话框背景颜色 | The background color of the dialog */
+  --custom-dialog-background-color: var(--custom-transparent);
   /* 思源块引用颜色 | The color of SiYuan block reference */
   --custom-span-block-ref-color: var(--custom-striking-color);
   /* 思源内部超链接颜色 | The color of SiYuan internal hyperlink */
