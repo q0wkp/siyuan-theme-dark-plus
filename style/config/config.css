@@ -500,18 +500,12 @@
   /* 鼠标划选文本颜色 | The color of the text selected */
   --custom-selection-color: inherit;
   --custom-selection-background-color: var(--b3-theme-primary-lighter);
-  /* 空行聚焦提示 | Blank line focus prompt */
-  --custom-empty-focus-p: "´･-･)ﾉ㊫";
-  --custom-empty-focus-c: "´･-･)ﾉ↹";
-  --custom-empty-focus-t: "´･-･)ﾉ☑";
-  --custom-empty-focus-u: "´･-･)ﾉ◉";
-  --custom-empty-focus-o: "´･-･)ﾉ①";
-  /* 空行提示 | Blank line prompt */
-  --custom-empty-p: "这里是空的 (´･-･)ﾉ㊫";
-  --custom-empty-c: "这里是空的 (´･-･)ﾉ↹";
-  --custom-empty-t: "这里是空的 (´･-･)ﾉ☑";
-  --custom-empty-u: "这里是空的 (´･-･)ﾉ◉";
-  --custom-empty-o: "这里是空的 (´･-･)ﾉ①";
+  /* 空行提示 | Blank line marker */
+  --custom-empty-p: "↵";
+  --custom-empty-c: "↵";
+  --custom-empty-t: "↵";
+  --custom-empty-u: "↵";
+  --custom-empty-o: "↵";
   /* 面板内字段名显示样式 | The field name display style within the panel */
   /* 自动换行显示字段名 | Wrap displays the field names */
   /* --custom-backlink-display: table-cell; */
