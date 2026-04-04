@@ -594,10 +594,11 @@
     --custom-background-color: var(--custom-background-color-portrait);
   }
 }
+/* Noto Color Emoji */
 @font-face {
-  font-family: "Win10 Emoji";
+  font-family: "Noto Color Emoji";
   font-style: normal;
-  src: url(../../fonts/seguiemj.ttf);
+  src: url("../../fonts/NotoColorEmoji-Regular.ttf");
 }
 /* 更改原属性 */
 :root {
@@ -611,12 +612,11 @@
         "Microsoft Yahei",
         sans-serif,
 
-        "Win10 Emoji",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
         "Noto Color Emoji",
-        "Segoe UI Symbol",
+        "Apple Color Emoji",
         "Android Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
         "EmojiSymbols";
   --b3-font-family-code: "Sarasa Mono SC",
 
@@ -630,25 +630,23 @@
 
         "SimHei",
 
-        "Win10 Emoji",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
         "Noto Color Emoji",
-        "Segoe UI Symbol",
+        "Apple Color Emoji",
         "Android Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
         "EmojiSymbols";
   --b3-font-family-graph: "Sarasa Mono SC",
         mononoki;
   --b3-font-family-math: KaTeX_Math,
         KaTeX_Main;
-  --b3-font-family-emoji: "Win10 Emoji",
+  --b3-font-family-emoji: "Noto Color Emoji",
+        "Apple Color Emoji",
+        "Android Emoji",
+        "Twemoji Mozilla",
         "Segoe UI Emoji",
         "Segoe UI Symbol",
-        "Segoe UI",
-        "Apple Color Emoji",
-        "Twemoji Mozilla",
-        "Noto Color Emoji",
-        "Android Emoji";
+        "Segoe UI";
   /* 线条 */
   --b3-border-color: var(--custom-components-light);
   /* 提示窗口背景颜色 */
