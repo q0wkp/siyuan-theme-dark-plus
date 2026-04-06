@@ -14,10 +14,6 @@ import {
 } from '../module/config.js';
 import { printHotKey } from './hotkey.js';
 import {
-    editDocKramdown,
-    editBlockKramdown,
-} from './markdown.js';
-import {
     getEditor,
     getEditors,
     setBlockDOMAttrs,
@@ -48,77 +44,6 @@ import {
     pushErrMsg,
 } from './api.js';
 
-var jupyterConfig;
-var jupyterWorker;
-var jupyterImportWorker;
-
-if (config.theme.jupyter.enable) {
-    if (config.theme.jupyter.worker.enable) {
-        /* worker 错误捕获 */
-        const worker_error_handler = e => {
-            console.error(e);
-        };
-
-        if (config.theme.jupyter.worker.main.enable) {
-            // const jupyterConfig = getConf();
-            // REF [Web Workers API - Web API 接口参考 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API)
-            jupyterWorker = new Worker(
-                config.theme.jupyter.worker.main.url,
-                config.theme.jupyter.worker.main.options,
-            );
-
-            jupyterWorker.addEventListener('error', worker_error_handler);
-            jupyterWorker.addEventListener('messageerror', worker_error_handler);
-
-            jupyterWorker.addEventListener('message', e => {
-                // console.log(e);
-                const data = JSON.parse(e.data);
-                switch (data.type) {
-                    case 'status':
-                        switch (data.status) {
-                            case 'ready':
-                                /* 是否就绪 */
-                                jupyterWorker.postMessage(JSON.stringify({
-                                    type: 'call',
-                                    handle: 'getConf',
-                                    params: [],
-                                }));
-                                jupyterWorker.postMessage(JSON.stringify({
-                                    type: 'call',
-                                    handle: 'setLang',
-                                    params: [window.theme.languageMode],
-                                }));
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    case 'call':
-                        switch (data.handle) {
-                            case 'getConf':
-                                jupyterConfig = data.return;
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            });
-        }
-
-        if (config.theme.jupyter.worker.import.enable) {
-            jupyterImportWorker = new Worker(
-                config.theme.jupyter.worker.import.url,
-                config.theme.jupyter.worker.import.options,
-            );
-
-            jupyterImportWorker.addEventListener('error', worker_error_handler);
-            jupyterImportWorker.addEventListener('messageerror', worker_error_handler);
-        }
-    }
-}
 
 var toolbarItemList = [];
 var toolbar_timeout_id = null; // 工具栏延时显示定时器
@@ -896,64 +821,6 @@ const TASK_HANDLER = {
         item.itemsLoad = !item.itemsLoad;
         menuItem.remove();
     },
-    /* 在新窗口打开 */
-    'window-open': async (e, id, params) => {
-        if (params.src) { // 如果需要打开资源
-            const BLOCK = await getBlockByID(id);
-            if (BLOCK) {
-                const DIV = document.createElement('div');
-                DIV.innerHTML = BLOCK.markdown;
-                window.theme.openNewWindow(
-                    'browser',
-                    DIV.firstElementChild.src,
-                    BLOCK.type === 'widget'
-                        ? { id: id }
-                        : undefined,
-                    config.theme.window.windowParams,
-                    config.theme.window.menu.template,
-                );
-                return null;
-            }
-            return null;
-        }
-        else if (params.href) { // 如果需要打开链接
-            window.theme.openNewWindow(
-                'browser',
-                params.href,
-                Object.assign({ id: id }, params.urlParams),
-                config.theme.window.windowParams,
-                config.theme.window.menu.template,
-            );
-            return null;
-        }
-        else { // 默认打开 Web 端
-            window.theme.openNewWindow(
-                undefined,
-                undefined,
-                Object.assign({ id: id }, params),
-                config.theme.window.windowParams,
-                config.theme.window.menu.template,
-            );
-        }
-    },
-    /* 在新窗口打开编辑器 */
-    'window-open-editor': async (e, id, params) => {
-        window.theme.openNewWindow(
-            'editor',
-            undefined,
-            Object.assign({ id: id }, params),
-            config.theme.window.windowParams,
-            config.theme.window.menu.template,
-            config.theme.window.open.editor.path.index,
-        );
-    },
-    /* 在新窗口打开编辑器并编辑 kramdown 文档源代码 */
-    'window-open-editor-kramdown': async (e, id, params) => {
-        if (compareVersion(window.theme.kernelVersion, '2.0.24') > 0)
-            editBlockKramdown(id);
-        else
-            editDocKramdown(id);
-    },
     /* 选择文件 */
     'file-select': async (e, id, params) => {
         fileSelect(params.accept, params.multiple).then(files => {
@@ -978,80 +845,6 @@ const TASK_HANDLER = {
     },
     /* 处理输入框内容 */
     'handler': async (e, id, params) => params.handler(e, id, params),
-    /* 打开全局设置窗口 */
-    'jupyter-open-global-settings': async (e, id, params) => {
-        window.theme.openNewWindow(
-            'browser',
-            params.href,
-            Object.assign({ id: id }, params.urlParams),
-            config.theme.window.windowParams,
-            config.theme.window.menu.template,
-            undefined,
-            undefined,
-            undefined,
-            async (...args) => jupyterWorker.postMessage(JSON.stringify({
-                type: 'call',
-                handle: 'reloadCustomJson',
-                params: [],
-            })),
-        );
-        return null;
-    },
-    /* 关闭会话 */
-    // 'jupyter-close-connection': closeConnection,
-    'jupyter-close-connection': async (...args) => jupyterWorker.postMessage(JSON.stringify({
-        type: 'call',
-        handle: 'closeConnection',
-        params: args,
-    })),
-    /* 重启内核 */
-    // 'jupyter-restart-kernel': restartKernel,
-    'jupyter-restart-kernel': async (...args) => jupyterWorker.postMessage(JSON.stringify({
-        type: 'call',
-        handle: 'restartKernel',
-        params: args,
-    })),
-    /* 运行单元格 */
-    // 'jupyter-run-cell': runCell,
-    'jupyter-run-cell': async (...args) => jupyterWorker.postMessage(JSON.stringify({
-        type: 'call',
-        handle: 'runCell',
-        params: args,
-    })),
-    /* 运行所有单元格 */
-    'jupyter-run-all-cells': async (e, id, params) => {
-        const stmt = `SELECT a.block_id FROM attributes AS a WHERE a.root_id = '${id}' AND a.name = '${jupyterConfig.jupyter.attrs.code.type.key}' AND a.value = '${jupyterConfig.jupyter.attrs.code.type.value}';`;
-        const rows = await sql(stmt);
-        if (rows && rows.length > 0) {
-            for (let i = 0; i < rows.length; ++i) {
-                const index = await getBlockIndex(rows[i].block_id);
-                if (!index) return;
-                rows[i].index = index;
-            }
-            rows.sort((a, b) => a.index - b.index);
-            const IDs = rows.map(row => row.block_id);
-
-            jupyterWorker.postMessage(JSON.stringify({
-                type: 'call',
-                handle: 'runCells',
-                params: [
-                    e,
-                    IDs,
-                    params,
-                ],
-            }));
-        }
-    },
-    /* 导入 *.ipynb */
-    'jupyter-import-ipynb': async (e, id, params) => {
-        /* 读取并解析 ipynb */
-        const ipynb = await params.files[0].text();
-        jupyterImportWorker.postMessage(JSON.stringify({
-            type: 'call',
-            handle: 'importJson',
-            params: [id, ipynb, params.mode],
-        }));
-    },
     /* 归档页签 */
     'tab-archive': async (e, id, params) => {
         const editors = getEditors().filter(editor => {
