@@ -713,27 +713,20 @@ const config = {
                         //   { background, panel?, editor?, dialog? } — 设置背景，可选覆盖面板/编辑区/对话框
                         //     省略的 key 保持 CSS 默认（半透明叠加）| Omitted keys fall back to CSS default
                         light: [ // 自定义亮色背景列表 | Custom light background list
-                            { background: 'var(--b3-theme-surface)' }, // 仅换背景，面板/编辑区半透明 | Background only
-                            { background: '#ffffff', panel: '#f0f0f0', editor: '#ffffff' }, // 全指定 | All specified
-                            { background: '#f0f8ff', editor: '#ffffff' }, // 省略 panel（半透明）| Panel omitted
+                            `${THEME_PATHNAME}/images/light/momoka-design-light-brand-4K.png`,
                             null, // 恢复默认 | Restore default
                         ],
                         dark: [ // 自定义暗色背景列表 | Custom dark background list
-                            { background: 'var(--b3-theme-background)' }, // 仅换背景 | Background only
-                            { background: '#1e1e1e', panel: '#252525', editor: '#262626' }, // 全指定 | All specified
-                            { background: '#1a1a2e', editor: '#22223a' }, // 省略 panel（半透明）| Panel omitted
+                            `${THEME_PATHNAME}/images/dark/benjamin-voros-phIFdC6lA4E-unsplash.jpg`,
+                            `${THEME_PATHNAME}/images/dark/ahmet-yuksek-zSiqe6j9Aao-unsplash.jpg`,
                             null, // 恢复默认 | Restore default
                         ],
                     },
                     portrait: { // 竖屏背景 | Portrait background
                         light: [ // 自定义亮色背景列表 | Custom light background list
-                            { background: 'var(--b3-theme-surface)' }, // 仅换背景 | Background only
-                            { background: '#ffffff', panel: '#f0f0f0', editor: '#ffffff' }, // 全指定 | All specified
                             null, // 恢复默认 | Restore default
                         ],
                         dark: [ // 自定义暗色背景列表 | Custom dark background list
-                            { background: 'var(--b3-theme-background)' }, // 仅换背景 | Background only
-                            { background: '#1e1e1e', panel: '#252525', editor: '#262626' }, // 全指定 | All specified
                             null, // 恢复默认 | Restore default
                         ],
                     },
