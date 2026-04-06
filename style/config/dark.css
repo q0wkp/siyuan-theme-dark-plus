@@ -26,7 +26,7 @@
   /* 鲜明颜色 | Striking color */
   --custom-striking-color: #ff9632;
   /* 编辑区背景颜色 | The background color of the edit area */
-  --custom-editor-background-color: var(--custom-transparent);
+  --custom-editor-background-color: #1E1F22;
   /* 侧边面板背景颜色 | The background color of the side panel */
   --custom-panel-background-color: var(--custom-transparent-deep);
   /* 弹出窗口背景颜色 | The background color of the popover */
