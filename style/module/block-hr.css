@@ -12,6 +12,3 @@
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }
-.protyle-wysiwyg [data-node-id][custom-jupyter-block-type=output] .hr[data-node-id] > div::after {
-  top: calc(0.5em - 3px) !important;
-}
