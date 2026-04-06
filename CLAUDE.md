@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v2.0.4)，作者 Zuoqiu Yingyi。
+这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v2.1.0)，作者 Zuoqiu Yingyi、q0wkp。
 支持 dark/light 双模式，最低要求思源 v3.1.17。
 
 ## 项目结构
@@ -26,7 +26,7 @@
 │   │   └── ...              # 其他 UI 组件（dialog, tab-bar, bar, card 等）
 │   └── dynamic-module/      # 动态样式（列表缩进线、竖向标签栏等）
 ├── script/
-│   ├── module/              # 19 个功能模块
+│   ├── module/              # 功能模块
 │   │   ├── background.js    # 背景图加载
 │   │   ├── blockattrs.js    # 块属性处理
 │   │   ├── config.js        # 主题配置管理
@@ -44,24 +44,22 @@
 │   │   ├── style.js         # 动态样式注入
 │   │   ├── timestamp.js     # 时间戳功能
 │   │   ├── typewriter.js    # 打字机模式
-│   │   ├── wheel.js         # 鼠标滚轮处理
-│   │   └── window.js        # 窗口管理（已标记 @deprecated）
-│   └── utils/               # 11 个工具库
+│   │   └── wheel.js         # 鼠标滚轮处理
+│   └── utils/               # 工具库
 │       ├── api.js           # 思源 API 封装（/api/* 请求）
 │       ├── dom.js           # DOM 操作
 │       ├── drag.js          # 拖拽
 │       ├── event.js         # 事件管理
 │       ├── hotkey.js        # 快捷键处理
 │       ├── listener.js      # 监听器管理
-│       ├── markdown.js      # Markdown 处理
 │       ├── misc.js          # 合并、比较等杂项
 │       ├── string.js        # 字符串工具（版本号比较等）
 │       ├── system.js        # 系统检测
 │       └── ui.js            # UI 辅助函数
-├── icon/                    # 3790+ 域名 SVG 图标
+├── icon/                    # 域名 SVG 图标
 ├── fonts/                   # 自定义字体（Segoe UI Emoji）
 ├── image/                   # 背景图（dark/light 各一套）
-├── app/                     # 独立应用（comment 评论组件等）
+├── app/                     # 独立应用（comment 评论组件）
 └── static/                  # 静态资源
 ```
 

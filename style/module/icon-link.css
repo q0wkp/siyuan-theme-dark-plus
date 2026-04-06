@@ -3967,20 +3967,6 @@
 #sidebar [data-type="sidebar-outline"] [data-node-id] span[data-type~=url][data-href^="assets/"][data-href$=".ipynb"]::before,
 .sy__outline [data-node-id] span[data-type~=url][data-href^="assets/"][data-href$=".ipynb"]::before,
 .protyle-wysiwyg [data-node-id] span[data-type~=url][data-href^="assets/"][data-href$=".ipynb"]::before,
-#sidebar [data-type="sidebar-outline"] [data-node-id] span[data-type~=a][data-href^="/assets/"][data-href$=".ipynb"]::before,
-.sy__outline [data-node-id] span[data-type~=a][data-href^="/assets/"][data-href$=".ipynb"]::before,
-.protyle-wysiwyg [data-node-id] span[data-type~=a][data-href^="/assets/"][data-href$=".ipynb"]::before,
-#sidebar [data-type="sidebar-outline"] [data-node-id] span[data-type~=url][data-href^="/assets/"][data-href$=".ipynb"]::before,
-.sy__outline [data-node-id] span[data-type~=url][data-href^="/assets/"][data-href$=".ipynb"]::before,
-.protyle-wysiwyg [data-node-id] span[data-type~=url][data-href^="/assets/"][data-href$=".ipynb"]::before {
-  background-image: url(/appearance/themes/Dark+/icon/jupyter-notebook.svg);
-}
-.protyle-wysiwyg a[href^="assets/"][href$=".ipynb"]::before,
-.b3-typography a[href^="assets/"][href$=".ipynb"]::before,
-.protyle-wysiwyg a[href^="/assets/"][href$=".ipynb"]::before,
-.b3-typography a[href^="/assets/"][href$=".ipynb"]::before {
-  background-image: url(/appearance/themes/Dark+/icon/jupyter-notebook.svg);
-}
 /* -------------------------------- 静态文件目录 -------------------------------- */
 /* 资源 */
 #sidebar [data-type="sidebar-outline"] [data-node-id] span[data-type~=a][data-href$="/"][data-href^="assets/"]::before,

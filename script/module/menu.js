@@ -1,7 +1,6 @@
 /* 菜单增强 */
 
 import { config } from './config.js';
-import { getSysFonts } from './../utils/api.js';
 import { globalEventHandler } from './../utils/listener.js';
 import {
     getBlockMark, // 获得块标记 ID
@@ -16,30 +15,6 @@ import {
 var block_mark = null; // 块标获取的块
 var block_menu_enable = false; // 块菜单是否激活
 // var block_menu_observer = null; // 块菜单
-
-const COMMON_FONTS = [
-    '等线',
-    '方正舒体',
-    '方正姚体',
-    '仿宋',
-    '黑体',
-    '华文彩云',
-    '华文仿宋',
-    '华文琥珀',
-    '华文楷体',
-    '华文隶书',
-    '华文宋体',
-    '华文细黑',
-    '华文新魏',
-    '华文行楷',
-    '华文中宋',
-    '楷体',
-    '隶书',
-    '宋体',
-    '微软雅黑',
-    '新宋体',
-    '幼圆',
-];
 
 /**
  * 块菜单更改回调函数
@@ -211,84 +186,10 @@ function menuOverride() {
     });
 }
 
-/* 加载字体 */
-async function loadFonts(menuItems, fonts, mode) {
-    switch (mode) {
-        case 'custom-font-family':
-            fonts.forEach(font => menuItems.push({ // 加载自定义字体
-                enable: true,
-                type: null,
-                mode: "button",
-                icon: "#iconFont",
-                label: {
-                    zh_CN: font,
-                    other: font,
-                    style: `font-family: "${font}"`,
-                },
-                accelerator: `font-family: "${font}"`,
-                click: {
-                    enable: true,
-                    callback: null,
-                    tasks: [
-                        {
-                            type: 'attr-update',
-                            params: {
-                                'custom-font-family': font,
-                            },
-                        },
-                    ],
-                },
-            }));
-            break;
-        case 'style':
-            fonts.forEach(font => menuItems.push({ // 加载其他字体
-                enable: true,
-                type: null,
-                mode: "button",
-                icon: "#iconFont",
-                label: {
-                    zh_CN: font,
-                    other: font,
-                    style: `font-family: '${font}'`,
-                },
-                accelerator: font,
-                click: {
-                    enable: true,
-                    callback: null,
-                    tasks: [
-                        {
-                            type: 'attr-set',
-                            params: {
-                                'style': {
-                                    regexp: /\s*font-family:.*?;/g,
-                                    value: `font-family: "${font}";`,
-                                },
-                            },
-                        },
-                    ],
-                },
-            }));
-            break;
-        default:
-    }
-}
-
-/* 加载字体菜单项 */
-async function loadFontsItem() {
-    let system_fonts = await getSysFonts();
-    // loadFonts(config.theme.menu.block.items[0].items, COMMON_FONTS, 'custom-font-family');
-    // loadFonts(config.theme.menu.block.items[1].items, system_fonts, 'style');
-    loadFonts(config.theme.menu.block.items[0].items[0].items, COMMON_FONTS, 'custom-font-family');
-    loadFonts(config.theme.menu.block.items[0].items[1].items, system_fonts, 'style');
-}
-
-
 setTimeout(() => {
     try {
         if (config.theme.menu.enable) {
             if (config.theme.menu.block.enable) {
-                setTimeout(loadFontsItem, 0);
-
                 // block_menu_observer = new CommonMenuObserver(blockMenuCallback);
                 menuOverride();
 

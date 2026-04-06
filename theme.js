@@ -413,9 +413,7 @@ import(window.theme.addURLParam(`${window.theme.root}/script/module/readonly.js`
 import(window.theme.addURLParam(`${window.theme.root}/script/module/reload.js`));
 import(window.theme.addURLParam(`${window.theme.root}/script/module/style.js`));
 import(window.theme.addURLParam(`${window.theme.root}/script/module/timestamp.js`));
-import(window.theme.addURLParam(`${window.theme.root}/script/module/typewriter.js`));
 import(window.theme.addURLParam(`${window.theme.root}/script/module/wheel.js`));
-import(window.theme.addURLParam(`${window.theme.root}/script/module/window.js`)); // @deprecated
 
 /* 加载默认块属性注入模块 */
 import(window.theme.addURLParam(`${window.theme.root}/script/module/defaultattrs.js`))
