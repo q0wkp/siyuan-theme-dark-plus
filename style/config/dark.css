@@ -9,9 +9,9 @@
   /* 对话框背景图片 */
   --custom-background-image-dialog: unset;
   /* 标签图标 | The icon of tag */
-  --custom-span-tag-icon: url(/appearance/themes/Dark+/icon/tag.svg);
+  --custom-span-tag-icon: url(/appearance/themes/Dark+Modified/icon/tag.svg);
   /* 块引用波浪线动画图标 | The icon of wavy line animation */
-  --custom-span-ref-animation-icon: url(/appearance/themes/Dark+/icon/wavy-line.svg);
+  --custom-span-ref-animation-icon: url(/appearance/themes/Dark+Modified/icon/wavy-line.svg);
   /* 透明组件颜色 | Transparent component color */
   --custom-transparent-lightest: #4444;
   --custom-transparent-lighter: #3338;
