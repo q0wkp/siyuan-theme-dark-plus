@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v3.1.3)，作者 Zuoqiu Yingyi、q0wkp。
+这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v3.1.4-mod.1)，作者 Zuoqiu Yingyi、q0wkp。
 支持 dark/light 双模式，最低要求思源 v3.8.3。
 
 ## 项目结构
@@ -118,7 +118,10 @@
   `git diff -U0 <base> <fork-head>` must reverse-apply (`git apply -R --check --unidiff-zero`) to the merge result.
 - Upstream still ships `.less` sources next to the compiled `.css`; the fork is CSS-only, so delete every `.less`
   the merge brings in (the `.css` counterparts already carry the change).
-- User's decision (2026-10-24): the version number follows upstream ("对齐上游 3.1.3").
+- User's decisions (2026-10-24): the version number follows upstream ("对齐上游 3.1.3"), with a fork version of
+  its own that sorts above it; the scheme chosen is `<upstream patch + 1>-mod.<N>`: upstream 3.1.3 → 3.1.4-mod.1,
+  3.1.4-mod.2…; upstream 3.1.4 → 3.1.5-mod.1; upstream 3.2.0 → 3.2.1-mod.1. (`3.1.3-1` sorts below 3.1.3 and
+  `3.1.3+1` equals it in semver, so neither works.)
 - `theme.json` i18n keys are `zh-CN` / `zh-TW` since upstream v3.x (formerly `zh_CN` / `zh_CHT`).
 - The package is named `Dark+Modified` (user's decision, 2026-10-24: a name of its own, installed with git), so the
   marketplace never offers the official Dark+ as an update over it. SiYuan v3.8.8 marks a theme invalid

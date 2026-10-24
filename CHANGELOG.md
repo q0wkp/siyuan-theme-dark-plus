@@ -1,5 +1,17 @@
 # 更改日志 | CHANGE LOG
 
+## v3.1.4-mod.1/2026-10-24
+
+- [v3.1.3 ... v3.1.4-mod.1](https://github.com/q0wkp/siyuan-theme-dark-plus/compare/v3.1.3...v3.1.4-mod.1)
+- 合并上游 v3.1.3, 保留本 fork 的全部改动 | Merge upstream v3.1.3, keeping all changes of this fork.
+- 包名改为 `Dark+Modified`, 与官方 Dark+ 区分, 通过思源 v3.8 的目录名校验且不会被集市更新覆盖 | Rename the package to `Dark+Modified` to distinguish it from the official Dark+, so it passes the folder name check of SiYuan v3.8 and is never overwritten by a marketplace update.
+- 主题资源路径由 `/appearance/themes/Dark+/` 改为 `/appearance/themes/Dark+Modified/` | Change the theme resource path from `/appearance/themes/Dark+/` to `/appearance/themes/Dark+Modified/`.
+- 跟随上游移除 `widgets/custom.css` 自定义样式文件 | Following upstream, remove the custom style file `widgets/custom.css`.
+- 最低思源版本提升至 v3.8.3 | Raise the minimum SiYuan version to v3.8.3.
+- `README.md` 新增 git 安装说明 | Add git installation instructions to `README.md`.
+
+---
+
 ## v3.1.3/2026-09-15
 
 - 调整设置面板中页签栏的样式 | Adjust the style of the tab bar in the settings panel.
@@ -54,6 +66,33 @@
 - 增强悬浮菜单移动端文档列表与搜索列表样式 | Enhance hover menu styles for mobile document and search lists
 - 重构对话框与移动端样式以提升布局一致性 | Refactor dialog and mobile styles for improved layout and consistency
 - 更新主题版本至 3.0.0 并调整模块导入以保持一致性 | Update theme version to 3.0.0 and adjust module imports for consistency
+
+---
+
+## v2.1.0/2026-04-07
+
+- [v2.0.4 ... v2.1.0](https://github.com/Zuoqiu-Yingyi/siyuan-theme-dark-plus/compare/v2.0.4...v2.1.0)
+- 添加默认自定义块属性功能 | Add default custom block attributes feature.
+- Fork 仓库清理: 移除未使用的资源并更新元数据 | Clean up fork: remove unused assets and update metadata.
+- 移除所有 `.less` 源码, 仅保留 `.css` | Remove all `.less` sources, only use `.css` from now on.
+- 标题自动编号从 `h2` 开始 (而非 `h1`) | Start heading auto-numbering from `h2` instead of `h1`.
+- 移除与 `siyuan_doctree_compress` 插件动态注入冲突的 `panel.css` 样式 | Remove `panel.css` styles that conflict with `siyuan_doctree_compress` plugin's dynamic injection.
+- 更换 emoji 字体: `Win10 Emoji` → `Noto Color Emoji` | Change emoji font from `Win10 Emoji` to `Noto Color Emoji`.
+- 空行标记由原符号改为 `↵` | Change the empty line marker to `↵`.
+- 个性化 `config.js` 默认配置 | Personalize `config.js` default settings.
+- 重构背景图系统: 双模式 + 按区域(面板/编辑区/对话框)覆盖 | Refactor background system: dual-mode with per-area (panel/editor/dialog) overrides.
+- 个性化 `dark.css` / `light.css` / `config.js` 配色 | Personalize `dark.css`, `light.css`, and `config.js` for style.
+- 移除已废弃的遗留功能模块 | Remove deprecated legacy feature modules:
+    - 移除 `webview` 中键打开块/链接功能 (鼠标中键 / Shift + 中键) | Remove `webview` middle-click open block/link feature (Middle / Shift + Middle).
+    - 移除 Monaco 编辑器集成 (`Alt + 中键` / `Shift + Alt + 中键`) | Remove Monaco editor integration (`Alt + Middle` / `Shift + Alt + Middle`).
+    - 移除 Jupyter 客户端 (`app/jupyter`) 及相关菜单/Worker/图标 | Remove Jupyter client (`app/jupyter`) and related menus, workers, and icons.
+    - 移除已废弃的 `script/module/window.js` 与 `script/utils/markdown.js` | Remove deprecated `script/module/window.js` and `script/utils/markdown.js`.
+    - 移除打字机模式 (`script/module/typewriter.js`) 及其工具栏按钮、快捷键、配置 | Remove typewriter mode (`script/module/typewriter.js`) and its toolbar button, hotkey, and config.
+    - 移除扩展菜单中的字体切换功能 (常用字体 / 其他字体) | Remove font switcher (Common Fonts / Other Fonts) from the extended menu.
+    - 移除扩展菜单中的块属性样式功能: 块样式输入、弹幕、滚屏显示、全宽显示、全屏显示、文本排版模式、显示 ID / 块序号 / 块内容 / 块轮廓、列表视图 (默认 / 脑图 / 表格 / 看板)、表格宽度 (默认 / 自动 / 全等) | Remove block-attribute style features from the extended menu: block style input, danmaku, scrolling display, full-width display, full-screen display, writing mode, display ID/block index/content/outline, list views (default/mindmap/table/board), table widths (default/auto/equal).
+- 扁平化扩展菜单: 移除 "更多" 子菜单包装, 项目直接置于扩展菜单下 | Flatten the extended menu: remove the "More" submenu wrapper and inline its items into the extended menu.
+
+---
 
 ## v2.0.4/2025-01-14
 
