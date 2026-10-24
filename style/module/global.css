@@ -15,14 +15,21 @@ body {
   border: none;
   background-color: var(--custom-background-transparent-color);
 }
+body > .fn__flex-1 {
+  overflow-x: hidden;
+}
 /* 文本选择 */
 ::selection {
   background-color: var(--custom-selection-background-color);
   color: var(--custom-selection-color);
 }
+.b3-list-item {
+  margin: 0;
+}
 .b3-list-item__toggle {
   border-radius: 2px;
   z-index: 2;
+  transition: unset;
 }
 .b3-list-item__toggle:hover {
   outline: 1px solid var(--b3-theme-on-surface-light);
@@ -33,9 +40,17 @@ body {
   word-wrap: normal;
   max-width: none;
 }
-/* 文本输入框 */
-textarea.b3-text-field {
-  max-width: 100%;
+input.b3-text-field,
+textarea.b3-text-field,
+input.b3-select,
+select.b3-select {
+  background-color: transparent;
+}
+input.b3-text-field:hover,
+textarea.b3-text-field:hover,
+input.b3-select:hover,
+select.b3-select:hover {
+  background-color: var(--b3-list-hover);
 }
 /* 开关 */
 input.b3-switch {

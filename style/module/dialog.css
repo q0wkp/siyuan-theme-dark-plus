@@ -39,25 +39,64 @@
 .b3-dialog__container .b3-dialog__content {
   background-color: transparent !important;
 }
-.b3-dialog__container .config__panel .b3-tab-bar .b3-form__icon {
-  /* 设置搜索输入框 */
+.b3-dialog__container .config__panel {
+  background-color: transparent;
 }
-.b3-dialog__container .config__panel .b3-tab-bar .config__tab-hr {
+.b3-dialog__container .config__panel .config__side {
+  padding: 12px;
+}
+.b3-dialog__container .config__panel .config__side .config__tab-head {
+  border-bottom: 2px solid var(--b3-border-color);
+  padding: 0 0 0.5em;
+  margin: 0 0 0.5em;
+}
+.b3-dialog__container .config__panel .config__side .config__tab-head .config__tab-title {
+  /* 设置对话框标题 */
+  padding: 0;
+}
+.b3-dialog__container .config__panel .config__side .config__tab-head .b3-form__icon {
+  /* 设置搜索输入框 */
+  margin: 0;
+}
+.b3-dialog__container .config__panel .config__side .config__tab-hr {
   /* 设置对话框分割线 */
   margin: 8px 0;
-}
-.b3-dialog__container .config__panel .b3-tab-bar .b3-list-item {
-  /* 设置页签项 */
-  margin: 8px !important;
 }
 .b3-dialog__container .config__panel .config__tab-wrap {
   background-color: transparent;
 }
+.b3-dialog__container .config__panel .config__tab-wrap .config__tab-container {
+  margin: 0;
+  padding: 1em;
+}
+.b3-dialog__container .config__panel .config__tab-wrap .config__tab-container:has(.layout-tab-bar) {
+  padding: 0;
+}
 .b3-dialog__container .config__panel .config__tab-container {
   background-color: transparent;
 }
-.b3-dialog__container .config__panel .config__tab-container[data-name=bazaar] .b3-card {
+.b3-dialog__container .config__panel .config__tab-container .layout-tab-bar {
+  padding: 0;
+}
+.b3-dialog__container .config__panel .config__tab-container .config-bazaar__title {
   background-color: transparent;
+}
+.b3-dialog__container .config__panel .config__tab-container .b3-card {
+  background-color: transparent;
+  box-shadow: unset;
+  border-radius: var(--custom-border-radius);
+  outline: 1px solid var(--custom-card-outline-color);
+}
+.b3-dialog__container .config__panel .config__tab-container .b3-card:hover {
+  background-color: var(--b3-list-hover);
+}
+.b3-dialog__container .config__panel .config__tab-container .config__view {
+  /* 视图面板 */
+  background-color: var(--custom-dialog-view-background-color);
+}
+.b3-dialog__container .config__panel .config__tab-container .config-bazaar__readme {
+  /* 主题预览对话框 */
+  background-color: var(--custom-dialog-readme-background-color);
 }
 .b3-dialog__container .config__panel .config__tab-container[data-name=bazaar] .config-bazaar__readme {
   background-color: var(--custom-dialog-bazaar-readme-background-color);
@@ -73,7 +112,9 @@
   box-shadow: initial;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--b3-border-color);
-  margin-bottom: 16px;
+}
+.b3-dialog__container .b3-label:last-child {
+  border-bottom: unset;
 }
 .b3-dialog__container .history__panel .history__text {
   /* 历史对话框内容框 */
@@ -116,14 +157,33 @@
 .b3-dialog__container .fn__flex > .b3-tab-container .config-account__center--text {
   background-color: transparent;
 }
-.b3-dialog__container .fn__flex > .b3-tab-container .config-bazaar__readme {
-  /* 主题预览对话框 */
-  background-color: var(--custom-dialog-readme-background-color);
-}
 .b3-dialog__container label.customItem > span.ft__on-surface.fn__flex-center {
   /* 自定义属性名称全宽显示 */
   min-width: 100px;
   width: auto !important;
+}
+.config-group {
+  background-color: transparent;
+  border: 1px solid var(--b3-border-color);
+  border-radius: var(--custom-border-radius);
+}
+#model .config-group {
+  margin: 24px 16px;
+}
+.config-group .config-title {
+  margin: 0;
+  padding: 16px;
+  border-bottom: 1px solid var(--b3-border-color);
+}
+#model .config-group .config-title {
+  margin: 0;
+}
+.config-group .config-items {
+  background-color: transparent;
+}
+#model .config-group .config-items .config-item {
+  margin: 0 16px;
+  padding: 16px 0;
 }
 .search__header .search__path {
   height: 16px;
@@ -140,7 +200,6 @@
 #searchList > .b3-list-item[data-type="search-item"],
 .search__list > .b3-list-item[data-type="search-item"] {
   /* 未分组 */
-  padding-bottom: calc(1.25em + 1px);
 }
 #searchList > .b3-list-item[data-type="search-item"] .b3-list-item__text,
 .search__list > .b3-list-item[data-type="search-item"] .b3-list-item__text {
@@ -164,7 +223,6 @@
 }
 .b3-list.b3-list--background > .b3-list-item[data-type="card-item"] {
   /* 卡包列表 */
-  padding-bottom: calc(1.25em + 1px);
 }
 .b3-list.b3-list--background > .b3-list-item[data-type="card-item"] .b3-list-item__text {
   display: var(--custom-search-display);
