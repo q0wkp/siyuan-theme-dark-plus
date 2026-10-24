@@ -2,8 +2,8 @@
 
 ## 项目概述
 
-这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v2.1.0)，作者 Zuoqiu Yingyi、q0wkp。
-支持 dark/light 双模式，最低要求思源 v3.1.17。
+这是思源笔记 (SiYuan Note) 的 **Dark+** 多功能双模式主题 (v3.1.3)，作者 Zuoqiu Yingyi、q0wkp。
+支持 dark/light 双模式，最低要求思源 v3.8.3。
 
 ## 项目结构
 
@@ -102,8 +102,24 @@
 
 ## 用户自定义入口
 
-- 样式覆盖: `<工作空间>/data/widgets/custom.css`（被 theme.css 最后导入）
-- 模式样式: `custom-light.css` / `custom-dark.css`（在 theme.js 中按模式加载）
+- Following upstream v3.1.x, `/widgets/custom.css`, `custom-light.css` and `custom-dark.css` are no longer loaded;
+  user overrides go into SiYuan code snippets. Personal styling lives in the theme itself
+  (`style/config/*.css` and the fork's own commits).
+
+## Syncing with upstream
+
+- Remotes: `origin` is the fork (q0wkp), `upstream` is Zuoqiu-Yingyi. Merge with `git merge upstream/main`.
+- Upstream rewrote its history in 2026 (the commits up to v2.0.4 were re-created without GPG signatures), so the
+  fork's old history had no merge base with it. On 2026-10-24 the fork's own commits were rebased onto upstream's
+  v2.0.4 commit 7ef0b4b (same tree as the old 9ad6363); the pre-fix state is kept in branch
+  `bak/main-old`.
+- User's rule for this merge: "我的修改你要保留的, 别让上游的把我的commit给改掉了" — on every conflict the fork's
+  change wins; upstream changes are taken only where they do not touch the fork's edits. A check that works:
+  `git diff -U0 <base> <fork-head>` must reverse-apply (`git apply -R --check --unidiff-zero`) to the merge result.
+- Upstream still ships `.less` sources next to the compiled `.css`; the fork is CSS-only, so delete every `.less`
+  the merge brings in (the `.css` counterparts already carry the change).
+- User's decision (2026-10-24): the version number follows upstream ("对齐上游 3.1.3").
+- `theme.json` i18n keys are `zh-CN` / `zh-TW` since upstream v3.x (formerly `zh_CN` / `zh_CHT`).
 
 ## 多语言
 
