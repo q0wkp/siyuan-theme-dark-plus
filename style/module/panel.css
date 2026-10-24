@@ -1,5 +1,5 @@
 /* 侧边分栏面板 */
-[data-type='wnd'][data-id] {
+.fn__flex[data-type='wnd'][data-id] {
   min-height: 0%;
   margin: var(--custom-panel-distance);
   border-radius: var(--custom-border-radius);
@@ -34,4 +34,8 @@
 /* 设置标签页面板 */
 .config__tab-container {
   background-color: transparent;
+}
+/* 各个面板 */
+.layout-tab-container {
+  background-color: var(--custom-editor-background-color);
 }

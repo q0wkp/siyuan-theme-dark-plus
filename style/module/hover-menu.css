@@ -86,6 +86,7 @@
   backdrop-filter: none;
   outline: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--custom-popover-menu-outline-color);
   overflow-x: visible;
+  /* 设置面板分类列表 */
   /* 多层列表 */
 }
 .switch-doc .b3-list {
@@ -94,23 +95,29 @@
   border: initial;
   margin: 1px;
 }
+.config__side > .b3-list {
+  outline: unset;
+}
 .b3-list .b3-list {
   padding: unset;
   outline: unset;
 }
 .b3-list .b3-list-item {
   /* 菜单项 */
-  margin: 0 !important;
   border-radius: var(--custom-border-radius);
 }
 .b3-list.protyle-hint {
+  padding: calc(var(--custom-popover-menu-padding-width) / 2);
   width: var(--custom-popover-menu-width) !important;
 }
-.b3-list.protyle-hint > div {
-  overflow: unset !important;
+.b3-list.protyle-hint.agent-mention-menu .b3-list-item {
+  border: unset;
 }
-.b3-list.protyle-hint .b3-list-item {
+.b3-list.protyle-hint:not(.agent-mention-menu) .b3-list-item {
   width: 100% !important;
+}
+.b3-list.protyle-hint > div {
+  padding: calc(var(--custom-popover-menu-padding-width) / 2);
 }
 .b3-list.b3-menu.hint--menu,
 .b3-list.protyle-hint,
@@ -129,111 +136,151 @@
   column-gap: 1em;
   column-rule: var(--custom-list-guides-line-width) solid var(--b3-border-color);
 }
-.b3-list.hint--menu.protyle-hint > div > .b3-list-item {
-  width: 100% !important;
-}
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator {
-  /* 分割线 */
-  background-color: var(--b3-theme-on-surface);
-}
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading1"] {
   /* 一级子标题 */
   color: var(--custom-h1-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
-  /* 二级子标题 */
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading2"] {
+  /* 一级子标题 */
   color: var(--custom-h2-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button + button + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
-  /* 三级子标题 */
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading3"] {
+  /* 一级子标题 */
   color: var(--custom-h3-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button + button + button + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
-  /* 四级子标题 */
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading4"] {
+  /* 一级子标题 */
   color: var(--custom-h4-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button + button + button + button + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
-  /* 五级子标题 */
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading5"] {
+  /* 一级子标题 */
   color: var(--custom-h5-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:first-of-type + button + button + button + button + button + button *:is(.b3-list-item__graphic, .b3-list-item__text) {
-  /* 六级子标题 */
+.b3-list.hint--menu.protyle-hint > div .b3-list-item[data-id="heading6"] {
+  /* 一级子标题 */
   color: var(--custom-h6-color);
 }
-.b3-list.hint--menu.protyle-hint > div > div.b3-menu__separator:nth-of-type(4) {
-  /* 第4条分割线 */
-  display: none;
+.b3-list.hint--menu.protyle-hint > div .b3-list-item .color__square {
+  width: 1.25em;
+  height: 1.25em;
+}
+.b3-list.hint--menu.protyle-hint > div .b3-menu__separator {
+  /* 分割线 */
 }
 .b3-list.hint--menu > .emojis {
   /* 表情菜单 */
   /* REF https: //github.com/siyuan-note/siyuan/issues/4575#issuecomment-1152490468 */
   column-span: all;
 }
-.b3-list:not(ul) .b3-list-item,
 .b3-list.b3-tab-bar .b3-list-item,
+.b3-list.protyle-hint .b3-list-item,
+.sy__inbox .b3-list .b3-list-item,
 .sy__backlink .b3-list .b3-list-item,
 .b3-dialog__container .b3-list .b3-list-item,
-#historyContainer .b3-list .b3-list-item {
+.b3-menu__filter .b3-list .b3-list-item,
+.protyle-util .b3-list .b3-list-item,
+#historyContainer .b3-list .b3-list-item,
+#modelMain .b3-list .b3-list-item,
+#searchList.b3-list .b3-list-item,
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item {
   /* padding-top: var(--custom-popover-menu-margin-width); */
   /* border-bottom: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--b3-theme-on-surface); */
-  margin: var(--custom-popover-menu-margin-width) 0 !important;
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) 0;
   border-radius: var(--custom-border-radius);
   outline: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--custom-popover-menu-outline-color);
+  outline-offset: calc(var(--custom-popover-menu-outline-width) * -1);
 }
-.b3-list:not(ul) .b3-list-item:first-child,
 .b3-list.b3-tab-bar .b3-list-item:first-child,
+.b3-list.protyle-hint .b3-list-item:first-child,
+.sy__inbox .b3-list .b3-list-item:first-child,
 .sy__backlink .b3-list .b3-list-item:first-child,
 .b3-dialog__container .b3-list .b3-list-item:first-child,
-#historyContainer .b3-list .b3-list-item:first-child {
+.b3-menu__filter .b3-list .b3-list-item:first-child,
+.protyle-util .b3-list .b3-list-item:first-child,
+#historyContainer .b3-list .b3-list-item:first-child,
+#modelMain .b3-list .b3-list-item:first-child,
+#searchList.b3-list .b3-list-item:first-child,
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item:first-child {
   /* 补偿第一项 */
   margin-top: 0 !important;
 }
-.b3-list:not(ul) .b3-list-item:last-child:not(.fn_none),
 .b3-list.b3-tab-bar .b3-list-item:last-child:not(.fn_none),
+.b3-list.protyle-hint .b3-list-item:last-child:not(.fn_none),
+.sy__inbox .b3-list .b3-list-item:last-child:not(.fn_none),
 .sy__backlink .b3-list .b3-list-item:last-child:not(.fn_none),
 .b3-dialog__container .b3-list .b3-list-item:last-child:not(.fn_none),
-#historyContainer .b3-list .b3-list-item:last-child:not(.fn_none) {
+.b3-menu__filter .b3-list .b3-list-item:last-child:not(.fn_none),
+.protyle-util .b3-list .b3-list-item:last-child:not(.fn_none),
+#historyContainer .b3-list .b3-list-item:last-child:not(.fn_none),
+#modelMain .b3-list .b3-list-item:last-child:not(.fn_none),
+#searchList.b3-list .b3-list-item:last-child:not(.fn_none),
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item:last-child:not(.fn_none) {
   /* 补偿最后一项 */
   margin-bottom: 0 !important;
 }
-.b3-list:not(ul) .b3-list-itembutton,
 .b3-list.b3-tab-bar .b3-list-itembutton,
+.b3-list.protyle-hint .b3-list-itembutton,
+.sy__inbox .b3-list .b3-list-itembutton,
 .sy__backlink .b3-list .b3-list-itembutton,
 .b3-dialog__container .b3-list .b3-list-itembutton,
-#historyContainer .b3-list .b3-list-itembutton {
-  margin: var(--custom-popover-menu-margin-width) auto !important;
+.b3-menu__filter .b3-list .b3-list-itembutton,
+.protyle-util .b3-list .b3-list-itembutton,
+#historyContainer .b3-list .b3-list-itembutton,
+#modelMain .b3-list .b3-list-itembutton,
+#searchList.b3-list .b3-list-itembutton,
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-itembutton {
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) auto !important;
 }
-.b3-list:not(ul) .b3-list-item .b3-list-item__meta:not(.fn__flex),
 .b3-list.b3-tab-bar .b3-list-item .b3-list-item__meta:not(.fn__flex),
+.b3-list.protyle-hint .b3-list-item .b3-list-item__meta:not(.fn__flex),
+.sy__inbox .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
 .sy__backlink .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
 .b3-dialog__container .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
-#historyContainer .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex) {
+.b3-menu__filter .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
+.protyle-util .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
+#historyContainer .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
+#modelMain .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
+#searchList.b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex),
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item .b3-list-item__meta:not(.fn__flex) {
   /* 文档可读路径 */
   color: var(--custom-popover-menu-path-color);
   margin: 0;
   border: 0;
   padding: 0;
 }
-.b3-list:not(ul) .b3-list-item .b3-list-item__meta.fn__flex,
 .b3-list.b3-tab-bar .b3-list-item .b3-list-item__meta.fn__flex,
+.b3-list.protyle-hint .b3-list-item .b3-list-item__meta.fn__flex,
+.sy__inbox .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
 .sy__backlink .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
 .b3-dialog__container .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
-#historyContainer .b3-list .b3-list-item .b3-list-item__meta.fn__flex {
+.b3-menu__filter .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+.protyle-util .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#historyContainer .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#modelMain .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#searchList.b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item .b3-list-item__meta.fn__flex {
   color: var(--custom-popover-menu-attribute-color);
 }
-.b3-list:not(ul) .b3-list-item .b3-list-item__meta.fn__flex,
 .b3-list.b3-tab-bar .b3-list-item .b3-list-item__meta.fn__flex,
+.b3-list.protyle-hint .b3-list-item .b3-list-item__meta.fn__flex,
+.sy__inbox .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
 .sy__backlink .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
 .b3-dialog__container .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
-#historyContainer .b3-list .b3-list-item .b3-list-item__meta.fn__flex {
+.b3-menu__filter .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+.protyle-util .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#historyContainer .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#modelMain .b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#searchList.b3-list .b3-list-item .b3-list-item__meta.fn__flex,
+#sidebar .b3-list--mobile [data-type="sidebar-inbox"] .b3-list .b3-list-item .b3-list-item__meta.fn__flex {
   padding: 0.5em;
 }
 .b3-list.search__list > .b3-list-item + div:not(.b3-list-item) .b3-list-item {
   /* padding-top: var(--custom-popover-menu-margin-width); */
   /* border-bottom: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--b3-theme-on-surface); */
-  margin: var(--custom-popover-menu-margin-width) 0 !important;
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) 0;
   border-radius: var(--custom-border-radius);
   outline: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--custom-popover-menu-outline-color);
+  outline-offset: calc(var(--custom-popover-menu-outline-width) * -1);
 }
 .b3-list.search__list > .b3-list-item + div:not(.b3-list-item) .b3-list-item:first-child {
   /* 补偿第一项 */
@@ -244,7 +291,7 @@
   margin-bottom: 0 !important;
 }
 .b3-list.search__list > .b3-list-item + div:not(.b3-list-item) .b3-list-itembutton {
-  margin: var(--custom-popover-menu-margin-width) auto !important;
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) auto !important;
 }
 .b3-list.search__list > .b3-list-item + div:not(.b3-list-item) .b3-list-item .b3-list-item__meta:not(.fn__flex) {
   /* 文档可读路径 */
@@ -285,9 +332,10 @@
 #searchPanel .b3-list-item {
   /* padding-top: var(--custom-popover-menu-margin-width); */
   /* border-bottom: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--b3-theme-on-surface); */
-  margin: var(--custom-popover-menu-margin-width) 0 !important;
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) 0;
   border-radius: var(--custom-border-radius);
   outline: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--custom-popover-menu-outline-color);
+  outline-offset: calc(var(--custom-popover-menu-outline-width) * -1);
 }
 #searchPanel .b3-list-item:first-child {
   /* 补偿第一项 */
@@ -298,7 +346,7 @@
   margin-bottom: 0 !important;
 }
 #searchPanel .b3-list-itembutton {
-  margin: var(--custom-popover-menu-margin-width) auto !important;
+  margin: calc(var(--custom-popover-menu-margin-width) + var(--custom-popover-menu-outline-width) * 2) auto !important;
 }
 #searchPanel .b3-list-item .b3-list-item__meta:not(.fn__flex) {
   /* 文档可读路径 */
