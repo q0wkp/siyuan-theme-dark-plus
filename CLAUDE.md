@@ -120,6 +120,12 @@
   the merge brings in (the `.css` counterparts already carry the change).
 - User's decision (2026-10-24): the version number follows upstream ("对齐上游 3.1.3").
 - `theme.json` i18n keys are `zh-CN` / `zh-TW` since upstream v3.x (formerly `zh_CN` / `zh_CHT`).
+- The package is named `Dark+Modified` (user's decision, 2026-10-24: a name of its own, installed with git), so the
+  marketplace never offers the official Dark+ as an update over it. SiYuan v3.8.8 marks a theme invalid
+  (`name-mismatch`) unless `theme.json` `name` equals its folder name; keep `name` free of spaces and parentheses,
+  since CSS uses it in unquoted `url()`. Upstream hard-codes `/appearance/themes/Dark+/`: after every merge run
+  `grep -rl --include='*.css' --include='*.js' --include='*.html' '/appearance/themes/Dark+/' . | xargs sed -i
+  's#/appearance/themes/Dark+/#/appearance/themes/Dark+Modified/#g'`.
 
 ## 多语言
 

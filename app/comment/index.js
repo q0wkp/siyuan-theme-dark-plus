@@ -144,7 +144,7 @@ class SiyuanUtil {
       let css = document.createElement('link')
       css.setAttribute('type', 'text/css')
       css.setAttribute('rel', 'stylesheet')
-      css.setAttribute('href', '/appearance/themes/Dark+/app/comment/comment.css')
+      css.setAttribute('href', '/appearance/themes/Dark+Modified/app/comment/comment.css')
       fragment.appendChild(css)
       document.head.insertBefore(fragment, node)
     }

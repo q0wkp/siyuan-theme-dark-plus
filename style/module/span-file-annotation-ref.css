@@ -4,7 +4,7 @@
 .protyle-wysiwyg a[href*=".pdf?p="][href*="/assets/"]::before,
 .b3-typography a[href*=".pdf?p="][href*="/assets/"]::before {
   /* PDF 引用导出样式 */
-  background-image: url(/appearance/themes/Dark+/icon/pdf-page.svg);
+  background-image: url(/appearance/themes/Dark+Modified/icon/pdf-page.svg);
 }
 #sidebar [data-type="sidebar-outline"] [data-node-id] span[data-type~=file-annotation-ref],
 .sy__outline [data-node-id] span[data-type~=file-annotation-ref],
@@ -19,7 +19,7 @@
   content: "";
   display: inline-block;
   position: relative;
-  background-image: url(/appearance/themes/Dark+/icon/pdf-ref.svg);
+  background-image: url(/appearance/themes/Dark+Modified/icon/pdf-ref.svg);
   background-size: 0.875em auto;
   background-repeat: no-repeat;
   background-position: center;

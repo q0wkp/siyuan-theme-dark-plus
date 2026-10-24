@@ -4,8 +4,8 @@
 
 1. 创建文件 `<工作空间>/data/widgets/custom.css`  
    Create a file `<workspace>/data/widgets/custom.css`
-2. 在文件 `<工作空间>/data/widgets/custom.css` 中定义的值将覆盖 `<工作空间>/conf/appearance/themes/Dark+/style/module/config.css` 中对应的值  
-   The value defined in file `<workspace>/data/widgets/custom.css` overwrites the corresponding value in file `<workspace>/conf/appearance/themes/Dark+/style/module/config.css`.
+2. 在文件 `<工作空间>/data/widgets/custom.css` 中定义的值将覆盖 `<工作空间>/conf/appearance/themes/Dark+Modified/style/module/config.css` 中对应的值  
+   The value defined in file `<workspace>/data/widgets/custom.css` overwrites the corresponding value in file `<workspace>/conf/appearance/themes/Dark+Modified/style/module/config.css`.
 */
 /* 导入基础配色(如果需要导入其他配色, 请修改 URL) */
 /* @import url(/appearance/themes/midnight/theme.css); */
@@ -210,9 +210,9 @@
   /* 对话框背景图片 | Dialog background image */
   --custom-background-image-dialog: unset;
   /* 标签图标 | The icon of tag */
-  --custom-span-tag-icon: url(/appearance/themes/Dark+/icon/tag.svg);
+  --custom-span-tag-icon: url(/appearance/themes/Dark+Modified/icon/tag.svg);
   /* 块引用波浪线动画图标 | The icon of wavy line animation */
-  --custom-span-ref-animation-icon: url(/appearance/themes/Dark+/icon/wavy-line.svg);
+  --custom-span-ref-animation-icon: url(/appearance/themes/Dark+Modified/icon/wavy-line.svg);
   /* 行内代码文本颜色 | Inline code text color */
   --custom-span-code-color: currentColor;
   /* 图片反色滤波器 | Image inverted filter */
