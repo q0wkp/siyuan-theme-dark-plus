@@ -1,5 +1,14 @@
 # 更改日志 | CHANGE LOG
 
+## v3.1.4/2026-11-12
+
+- [v3.1.3 ... v3.1.4](https://github.com/Zuoqiu-Yingyi/siyuan-theme-dark-plus/compare/v3.1.3...v3.1.4)
+- 调整文档树与大纲面板中多级辅助线的样式 | Adjust the style of multi-level guides in the document tree and outline panels.
+- 调整编辑区文档标题样式 | Adjust the style of the document title in the editing area.
+- 调整块操作按钮样式 | Adjust the style of the block operation button.
+
+---
+
 ## v3.1.4-mod.1/2026-10-24
 
 - [v3.1.3 ... v3.1.4-mod.1](https://github.com/q0wkp/siyuan-theme-dark-plus/compare/v3.1.3...v3.1.4-mod.1)
@@ -14,6 +23,7 @@
 
 ## v3.1.3/2026-09-15
 
+- [v3.1.2 ... v3.1.3](https://github.com/Zuoqiu-Yingyi/siyuan-theme-dark-plus/compare/v3.1.2...v3.1.3)
 - 调整设置面板中页签栏的样式 | Adjust the style of the tab bar in the settings panel.
 
 ## v3.1.2/2026-08-23
