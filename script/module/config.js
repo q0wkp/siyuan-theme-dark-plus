@@ -237,12 +237,6 @@ const config = {
         timestamp: {
             // 视频/音频时间戳
             enable: true, // 是否启用时间戳
-            youtube: { // YouTube 时间戳相关配置
-                // iframe_api: "https://www.youtube.com/iframe_api", // API 工具
-                iframe_api: `${THEME_PATHNAME}/static/youtube/iframe_api.js`, // API 工具
-                type: 'text/javascript', // script 类型
-                polling: 500, // 轮询时间(单位: ms)
-            },
             jump: {
                 enable: true, // 是否启用跳转
             },
