@@ -98,30 +98,53 @@ async function reloadIframe(target) {
     }
 }
 
+/* 重新加载整个窗口 */
+async function reloadWindow() {
+    try {
+        // const { webFrame, webContents } = require('@electron/remote');
+        // webFrame.clearCache();
+        // webContents.getFocusedWebContents().reload();
+        // webContents.getFocusedWebContents().reloadIgnoringCache();
+        // webContents.getFocusedWebContents().session.clearCache().then((...args) => window.location.reload());
+
+        const { session } = require('@electron/remote');
+        session.defaultSession.clearCache().then((...args) => window.location.reload());
+        // session.defaultSession.clearCodeCaches().then((...args) => window.location.reload());
+        // session.defaultSession.clearStorageData().then((...args) => window.location.reload());
+    }
+    catch (err) {
+        console.warn(err);
+        window.location.reload()
+    }
+}
+
+/**
+ * 主题更新后重新加载窗口
+ * 思源内核监视当前主题的 theme.css, 该文件被写入时通知所有窗口将主题样式表的地址更换为 theme.css?<时间戳>,
+ * 此处观察该地址的变化 (.githooks/post-merge 在拉取到更新后写入 theme.css)
+ * Reloads the window after the theme was updated.
+ * The SiYuan kernel watches the current theme's theme.css and, when it is written, tells every window to
+ * point the theme's style sheet at theme.css?<timestamp>; that change of address is observed here
+ * (.githooks/post-merge writes theme.css after a pull brought in an update).
+ */
+function watchThemeUpdate() {
+    const style = window.theme.element.themeStyle;
+    if (!style) return;
+
+    const observer = new MutationObserver(() => {
+        if (config.theme.reload.update.href.test(style.getAttribute('href'))) reloadWindow();
+    });
+    observer.observe(style, { attributes: true, attributeFilter: ['href'] });
+    window.theme.eventTarget.addEventListener('destroy', () => observer.disconnect());
+}
+
 setTimeout(() => {
     try {
         if (config.theme.reload.enable) {
             if (config.theme.reload.window.enable) {
                 const Fn_reload = toolbarItemInit(
                     config.theme.reload.window.toolbar,
-                    async () => {
-                        try {
-                            // const { webFrame, webContents } = require('@electron/remote');
-                            // webFrame.clearCache();
-                            // webContents.getFocusedWebContents().reload();
-                            // webContents.getFocusedWebContents().reloadIgnoringCache();
-                            // webContents.getFocusedWebContents().session.clearCache().then((...args) => window.location.reload());
-
-                            const { session } = require('@electron/remote');
-                            session.defaultSession.clearCache().then((...args) => window.location.reload());
-                            // session.defaultSession.clearCodeCaches().then((...args) => window.location.reload());
-                            // session.defaultSession.clearStorageData().then((...args) => window.location.reload());
-                        }
-                        catch (err) {
-                            console.warn(err);
-                            window.location.reload()
-                        }
-                    },
+                    reloadWindow,
                 );
 
                 // 使用快捷键重新加载整个窗口
@@ -130,6 +153,11 @@ setTimeout(() => {
                     config.theme.hotkeys.reload.window,
                     _ => Fn_reload(),
                 );
+            }
+
+            if (config.theme.reload.update.enable) {
+                // 主题更新后自动重新加载窗口
+                watchThemeUpdate();
             }
 
             if (config.theme.reload.iframe.enable) {

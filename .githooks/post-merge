@@ -1,0 +1,16 @@
+#!/bin/sh
+# Reloads every open SiYuan window after a pull brought in new commits, so the updated theme shows
+# without a manual refresh. Git runs post-merge only when a pull or merge changed the checkout.
+#
+# Enable it once in a checkout that SiYuan loads the theme from:
+#   git config core.hooksPath .githooks
+#
+# The SiYuan kernel watches the theme in use and tells its windows when theme.css was written;
+# script/module/reload.js reloads the window on that. So this only writes theme.css, after Git has
+# written everything else: the first byte is written back in place, which leaves the content as it is.
+
+# the checkout is the folder above this script's, so it also works when run by hand from elsewhere
+top=$(cd "$(dirname "$0")/.." && pwd) || exit 0
+dd if="$top/theme.css" of="$top/theme.css" bs=1 count=1 conv=notrunc 2> /dev/null ||
+    echo "post-merge: could not write theme.css; reload SiYuan by hand" >&2
+exit 0

@@ -325,6 +325,10 @@ const config = {
             iframe: {
                 enable: true, // 是否启用 iframe 重新加载
             },
+            update: {
+                enable: true, // 是否在主题更新后自动重新加载窗口 (由 .githooks/post-merge 触发)
+                href: /\/theme\.css\?\d+$/, // 思源内核通知刷新主题样式时使用的地址 (theme.css?<时间戳>)
+            },
         },
         fullscreen: {
             // 全屏
