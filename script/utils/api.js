@@ -286,8 +286,9 @@ async function 设置思源块属性(内容块id, 属性对象) {
     }))
 }
 
-async function 以id获取文档块markdown(文档id) {
+async function 以id获取文档块markdown(文档id, 导出选项 = {}) {
     let data = {
+        ...导出选项, // refMode, embedMode, yfm 等, 未指定的项使用思源的导出设置
         id: 文档id,
     }
     let url = '/api/export/exportMdContent'

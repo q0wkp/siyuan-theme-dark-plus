@@ -27,10 +27,14 @@ import {
     pushErrMsg,
 } from './../utils/api.js';
 
-async function docCopy() {
+/**
+ * 复制当前文档全文
+ * @params {number} refMode: 块引用导出模式 (3: 仅锚文本, 4: 锚文本 + 脚注)
+ */
+async function docCopy(refMode) {
     let id = getFocusedDocID();
     if (id) {
-        let data = await exportMdContent(id);
+        let data = await exportMdContent(id, { refMode });
         if (data) {
             let content = data.content;
             copyToClipboard(content)
@@ -357,12 +361,23 @@ setTimeout(() => {
                 // 复制当前文档全文
                 const Fn_docCopy = toolbarItemInit(
                     config.theme.doc.copy.toolbar,
-                    docCopy,
+                    () => docCopy(config.theme.doc.copy.toolbar.refMode),
                 );
                 globalEventHandler.addEventHandler(
                     'keyup',
                     config.theme.hotkeys.doc.copy,
                     _ => Fn_docCopy(),
+                );
+
+                // 复制当前文档全文及其引用的内容
+                const Fn_docCopyRef = toolbarItemInit(
+                    config.theme.doc.copy.toolbarRef,
+                    () => docCopy(config.theme.doc.copy.toolbarRef.refMode),
+                );
+                globalEventHandler.addEventHandler(
+                    'keyup',
+                    config.theme.hotkeys.doc.copyRef,
+                    _ => Fn_docCopyRef(),
                 );
             }
 

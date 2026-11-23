@@ -488,6 +488,21 @@ const config = {
                     },
                     icon: '#iconCopy',
                     index: 12,
+                    refMode: 3, // 块引用导出模式: 仅锚文本 | Block ref export mode: anchor text only
+                },
+                toolbarRef: { // 菜单栏 (含引用内容 | with referenced content)
+                    enable: true,
+                    display: true,
+                    id: 'toolbar-theme-doc-copy-ref',
+                    hotkey: () => config.theme.hotkeys.doc.copyRef,
+                    label: {
+                        zh_CN: '复制当前文档内容及其引用的内容 (Markdown)',
+                        zh_CHT: '復製當前文檔內容及其引用的內容 (Markdown)',
+                        other: 'Copy the Current Document Content with Referenced Content (Markdown)',
+                    },
+                    icon: '#iconRef',
+                    index: 13,
+                    refMode: 4, // 块引用导出模式: 锚文本 + 脚注 | Block ref export mode: anchor text with footnotes
                 },
                 message: {
                     success: {
@@ -515,7 +530,7 @@ const config = {
                         other: 'Delete the Current Document Content',
                     },
                     icon: '#iconTrashcan',
-                    index: 14,
+                    index: 15,
                 },
             },
             cut: {
@@ -531,7 +546,7 @@ const config = {
                         other: 'Cut the Current Document Content (Markdown)',
                     },
                     icon: '#iconCut',
-                    index: 13,
+                    index: 14,
                 },
                 message: {
                     success: {
@@ -767,7 +782,7 @@ const config = {
                         other: 'Clear the Current Document Browsing Location History',
                     },
                     icon: '#iconTrashcan',
-                    index: 15,
+                    index: 16,
                 },
             }
         },
@@ -1573,6 +1588,15 @@ const config = {
                     // 复制当前文档全文(Shift + Alt + C)
                     enable: false,
                     CtrlCmd: false,
+                    WinCtrl: false,
+                    Shift: true,
+                    Alt: true,
+                    key: 'C',
+                },
+                copyRef: {
+                    // 复制当前文档全文及其引用的内容(Ctrl + Shift + Alt + C)
+                    enable: false,
+                    CtrlCmd: true,
                     WinCtrl: false,
                     Shift: true,
                     Alt: true,
