@@ -17,8 +17,8 @@ Clone into a folder named `Dark+Modified` inside SiYuan's themes folder (SiYuan 
 git clone https://github.com/q0wkp/siyuan-theme-dark-plus.git "<THEMES_DIR>/Dark+Modified"
 ```
 
-`<THEMES_DIR>` is `<workspace>/data/themes` since SiYuan v3.8.5, and `<workspace>/conf/appearance/themes` in
-v3.8.3 and v3.8.4. For a fork, clone the fork's URL instead.
+`<THEMES_DIR>` is `<workspace>/data/themes`. The theme needs SiYuan v3.8.10 or later. For a fork, clone the
+fork's URL instead.
 
 ## Updating
 
