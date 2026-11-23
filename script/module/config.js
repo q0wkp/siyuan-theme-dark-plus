@@ -506,14 +506,14 @@ const config = {
                 },
                 message: {
                     success: {
-                        zh_CN: '复制当前文档内容 (Markdown) 成功',
-                        zh_CHT: '復製當前文檔內容 (Markdown) 成功',
-                        other: 'Copy the current document content (Markdown) succeeded.',
+                        zh_CN: '已复制',
+                        zh_CHT: '已復製',
+                        other: 'Copied.',
                     },
                     error: {
-                        zh_CN: '复制当前文档内容 (Markdown) 失败',
-                        zh_CHT: '復製當前文檔內容 (Markdown) 失敗',
-                        other: 'Copy the current document content (Markdown) failed.',
+                        zh_CN: '复制失败',
+                        zh_CHT: '復製失敗',
+                        other: 'Copy failed.',
                     },
                 },
             },

@@ -264,9 +264,13 @@ window.theme.clientMode = (() => {
 
 /**
  * 获取语言模式
- * @returns {string} 'zh_CN', 'zh_CNT', 'fr_FR', 'en_US'
+ * 思源 v3.x 的语言代码为 'zh-CN', 'zh-TW', 'en-US', 此处转换为主题文案使用的键
+ * SiYuan v3.x uses 'zh-CN', 'zh-TW', 'en-US'; they are mapped to the keys the theme's texts use
+ * @returns {string} 'zh_CN', 'zh_CHT', 'fr_FR', 'en_US'
  */
-window.theme.languageMode = window.siyuan.config.lang;
+window.theme.languageMode = (lang => ({
+    zh_TW: 'zh_CHT',
+})[lang] ?? lang)(`${window.siyuan.config.lang}`.replace('-', '_'));
 
 /**
  * 获取思源版本号
