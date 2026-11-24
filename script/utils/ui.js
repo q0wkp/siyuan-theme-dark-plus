@@ -146,10 +146,43 @@ function toolbarItemListPush(item) {
 
             /* 更多按钮 */
             const more = createToolbarItem(config.theme.toolbar.more);
+            /* 工具栏是否已离开停泊位 */
+            const isFloating = () => custom_tooldock.classList.contains(config.theme.tooldock.classes[0]);
+            /* 工具栏是否已展开 */
+            const isExpanded = () => custom_toolbar.style.display !== 'none';
+            /* 展开时的排布: false 为单列, true 为多行 */
+            let wide = false;
+            let wide_timeout_id = null; // 单击切换排布的延时, 双击时取消
+            /* 左边缘位于 left 时一行可容纳的按钮数 */
+            const fit = left => Math.min(
+                custom_tooldock.querySelectorAll('.toolbar__item').length,
+                Math.max(
+                    1,
+                    Math.floor(
+                        (document.body.offsetWidth - left - 1)
+                        / (more.offsetWidth + more.offsetLeft * 2)
+                    ),
+                ),
+            );
+            const setColumns = n => custom_tooldock.style.width = `calc(var(--custom-dock-width) * ${n})`;
+            /* 保存当前位置 */
+            const savePosition = () => {
+                custom.theme.tooldock.position.left = custom_tooldock.style.left;
+                custom.theme.tooldock.position.right = custom_tooldock.style.right;
+                custom.theme.tooldock.position.top = custom_tooldock.style.top;
+                custom.theme.tooldock.position.bottom = custom_tooldock.style.bottom;
+                custom.theme.tooldock.position.width = custom_tooldock.style.width;
+                custom.theme.tooldock.position.height = custom_tooldock.style.height;
+                setTimeout(async () => saveCustomFile(custom), 0);
+            };
             more.addEventListener('dblclick', e => {
                 /* 取消其他默认事件处理 */
                 e.preventDefault();
                 e.stopPropagation();
+                clearTimeout(wide_timeout_id); // 双击不切换排布
+
+                /* 停泊位上不展开工具栏: 展开后会叠在标题栏的其他内容上 */
+                if (!isFloating()) return;
 
                 // if (drag.status.flags.dragging) return; // 拖拽时忽略点击事件(无效)
                 let status, language = window.theme.languageMode;
@@ -170,6 +203,7 @@ function toolbarItemListPush(item) {
                     status = config.theme.toolbar.more.status.unfold
                     custom_toolbar.style.display = null;
                     custom.theme.toolbar[config.theme.toolbar.more.id].fold = false;
+                    setColumns(wide ? fit(x - more.offsetLeft) : 1);
                 }
                 else {
                     /* 重新更改定位 */
@@ -207,28 +241,23 @@ function toolbarItemListPush(item) {
                 setTimeout(async () => saveCustomFile(custom), 0);
             }, true);
 
-            /* 悬浮事件处理 */
-            function float(..._) {
+            /**
+             * 悬浮工具栏
+             * @params {boolean} save: 是否记录为已悬浮 (拖拽尚未超出范围时不记录)
+             */
+            function float(save = true) {
                 custom_tooldock.style.top = `${custom_tooldock.offsetTop}px`;
                 custom_tooldock.style.left = `${custom_tooldock.offsetLeft}px`;
                 custom_tooldock.classList.add(...config.theme.tooldock.classes);
                 reset.style.display = null; // 显示重置工具栏按钮
-                custom.theme.toolbar[config.theme.toolbar.more.id].state = true;
-                setTimeout(async () => saveCustomFile(custom), 0);
+                if (save) {
+                    custom.theme.toolbar[config.theme.toolbar.more.id].state = true;
+                    setTimeout(async () => saveCustomFile(custom), 0);
+                }
             };
 
-            /* 悬浮工具栏 */
-            custom_tooldock.addEventListener(
-                'mousedown',
-                float,
-                {
-                    capture: true,
-                    once: true,
-                },
-            );
-
-            /* 重置工具栏 */
-            reset.addEventListener('click', () => {
+            /* 将工具栏收回停泊位 */
+            function dock() {
                 /* 若工具栏是展开的, 则折叠工具栏 */
                 if (custom_toolbar.style.display !== 'none') {
                     more.dispatchEvent(new Event('dblclick'));
@@ -244,22 +273,64 @@ function toolbarItemListPush(item) {
                 custom_tooldock.style.height = null;
 
                 /* 移除工具栏悬浮类 */
-                custom_tooldock.classList.remove(...config.theme.tooldock.classes);
-
-                /* 点击后再次悬浮功能 */
-                custom_tooldock.addEventListener(
-                    'mousedown',
-                    float,
-                    {
-                        capture: true,
-                        once: true,
-                    },
-                );
+                custom_tooldock.classList.remove(...config.theme.tooldock.classes, config.theme.tooldock.pull.class);
 
                 /* 保存状态 */
                 custom.theme.toolbar[config.theme.toolbar.more.id].state = false;
                 setTimeout(async () => saveCustomFile(custom), 0);
+            }
+
+            /* 弹回停泊位: 滑回原位后收回 */
+            function snapBack() {
+                const from = custom_tooldock.getBoundingClientRect();
+                const to = reset.getBoundingClientRect();
+                custom_tooldock.animate(
+                    [
+                        { transform: 'none' },
+                        { transform: `translate(${to.x - from.x}px, ${to.y - from.y}px)` },
+                    ],
+                    { duration: config.theme.tooldock.pull.duration, easing: 'ease-out' },
+                ).finished.finally(dock);
+            }
+
+            /* 重置工具栏 */
+            reset.addEventListener('click', dock);
+
+            /* 展开后单击拖拽按钮: 在单列与多行之间切换 */
+            more.addEventListener('click', e => {
+                if (e.detail > 1 || pull.moved || !isFloating() || !isExpanded()) return;
+                clearTimeout(wide_timeout_id);
+                wide_timeout_id = setTimeout(() => {
+                    if (!isFloating() || !isExpanded()) return;
+                    wide = !wide;
+                    /* 以左上角定位, 使拖拽按钮留在原处 */
+                    const rect = custom_tooldock.getBoundingClientRect();
+                    custom_tooldock.style.left = `${100 * rect.x / document.documentElement.offsetWidth}vw`;
+                    custom_tooldock.style.top = `${100 * rect.y / document.documentElement.offsetHeight}vh`;
+                    custom_tooldock.style.right = null;
+                    custom_tooldock.style.bottom = null;
+                    setColumns(wide ? fit(rect.x) : 1);
+                    setTooltipDirection(
+                        getTooltipDirection,
+                        ...custom_tooldock.querySelectorAll('.toolbar__item'),
+                    );
+                    savePosition();
+                }, config.theme.toolbar.delay);
             });
+
+            /**
+             * 从停泊位拖出工具栏
+             * 按下拖拽按钮后移动超过 pull.from 才开始跟随鼠标,
+             * 松开时与按下位置的距离未超过 pull.out 则弹回停泊位
+             */
+            const pull = { x: 0, y: 0, docked: false, moved: false };
+            const pulled = e => Math.hypot(e.clientX - pull.x, e.clientY - pull.y);
+            more.addEventListener('mousedown', e => {
+                pull.x = e.clientX;
+                pull.y = e.clientY;
+                pull.docked = !isFloating();
+                pull.moved = false;
+            }, true);
 
             /**注册鼠标拖动事件
              * 由于该事件注册在当前节点的子节点处
@@ -272,51 +343,52 @@ function toolbarItemListPush(item) {
                 custom_tooldock,
                 document.documentElement,
                 // document.getElementById('layouts'),
-                drag.handler.move,
+                (e, ...args) => {
+                    if (!pull.moved) {
+                        if (pulled(e) < config.theme.tooldock.pull.from) return; // 尚未开始拖动
+                        pull.moved = true;
+                        if (pull.docked) float(false);
+                    }
+                    if (pull.docked) {
+                        /* 仍在弹回范围内时以半透明提示 */
+                        custom_tooldock.classList.toggle(
+                            config.theme.tooldock.pull.class,
+                            pulled(e) < config.theme.tooldock.pull.out,
+                        );
+                    }
+                    drag.handler.move(e, ...args);
+                },
                 (e, that, ..._) => { // 使用预处理方法调整宽度
-                    let multiple = 1;
-                    if (custom_toolbar.style.display !== 'none') { // 已展开
-                        if (custom_tooldock.offsetLeft <= 0) {
-                            /* 遇到左边界时压缩宽度 */
-                            multiple = 1;
-                        }
-                        else {
-                            /* 遇到右边界时压缩宽度 */
-                            const item_count = custom_tooldock.querySelectorAll('.toolbar__item').length;
-                            const x = e.clientX - that.status.drag.position.x;
-                            multiple = Math.min(
-                                item_count,
-                                Math.max(
-                                    1,
-                                    Math.floor(
-                                        (document.body.offsetWidth - x - 1)
-                                        / (more.offsetWidth + more.offsetLeft * 2)
-                                    ),
-                                ),
-                            );
-                        }
-                    }
-                    else { // 已折叠
-                        multiple = 1;
-                    }
-                    custom_tooldock.style.width = `calc(var(--custom-dock-width) * ${multiple})`;
+                    if (!pull.moved && pulled(e) < config.theme.tooldock.pull.from) return; // 尚未开始拖动
+                    /* 多行排布时, 遇到左边界压缩为单列, 遇到右边界压缩宽度 */
+                    setColumns(
+                        isExpanded() && wide && custom_tooldock.offsetLeft > 0
+                            ? fit(e.clientX - that.status.drag.position.x)
+                            : 1,
+                    );
                 },
                 undefined,
-                (..._) => { // 拖动完成回调方法
+                (e, ..._) => { // 拖动完成回调方法
+                    if (!pull.moved) { // 没有拖动
+                        pull.docked = false;
+                        return;
+                    }
+                    if (pull.docked) { // 本次拖动自停泊位开始
+                        pull.docked = false;
+                        custom_tooldock.classList.remove(config.theme.tooldock.pull.class);
+                        if (pulled(e) < config.theme.tooldock.pull.out) { // 未拖出范围, 弹回
+                            snapBack();
+                            return;
+                        }
+                        custom.theme.toolbar[config.theme.toolbar.more.id].state = true; // 已拖出
+                    }
                     /* 调整提示标签 */
                     setTooltipDirection(
                         getTooltipDirection,
                         ...custom_tooldock.querySelectorAll('.toolbar__item'),
                     );
 
-                    /* 保存当前位置 */
-                    custom.theme.tooldock.position.left = custom_tooldock.style.left;
-                    custom.theme.tooldock.position.right = custom_tooldock.style.right;
-                    custom.theme.tooldock.position.top = custom_tooldock.style.top;
-                    custom.theme.tooldock.position.bottom = custom_tooldock.style.bottom;
-                    custom.theme.tooldock.position.width = custom_tooldock.style.width;
-                    custom.theme.tooldock.position.height = custom_tooldock.style.height;
-                    setTimeout(async () => saveCustomFile(custom), 0);
+                    savePosition();
                 },
             );
 
@@ -356,6 +428,7 @@ function toolbarItemListPush(item) {
                     custom_tooldock.style.bottom = position.bottom;
                     custom_tooldock.style.width = position.width;
                     custom_tooldock.style.height = position.height;
+                    wide = isExpanded() && !!position.width && !/\* 1\)$/.test(position.width);
                 }
             }
         }

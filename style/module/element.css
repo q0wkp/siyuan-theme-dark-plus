@@ -3,25 +3,44 @@
 #custom-toolbar-more {
   cursor: move;
 }
-/* 自定义悬浮菜单栏 */
+/* 工具栏移出后留在原位的占位按钮: 拖拽按钮在工具栏收起时的图标, 反色显示 */
+#toolbar #custom-tooldock-reset,
+#toolbar #custom-tooldock-reset:hover {
+  color: var(--b3-theme-background);
+  background-color: var(--b3-theme-on-surface);
+}
+#toolbar #custom-tooldock-reset:hover {
+  background-color: var(--b3-theme-on-background);
+}
+/* 自定义悬浮菜单栏: 圆角底板, 细描边与投影 */
 .float-tooldock {
   position: absolute;
+  display: flex;
+  flex-wrap: wrap;
   width: var(--custom-dock-width);
-  height: var(--custom-bar-height);
+  min-height: var(--custom-dock-width);
   z-index: 201;
+  border-radius: calc(var(--custom-border-radius) + 2px);
+  background-color: var(--b3-theme-surface);
+  /* 使用阴影描边, 不占用宽度: 宽度由脚本按按钮数量设置 */
+  box-shadow: 0 0 0 1px var(--b3-border-color), 0 4px 12px rgba(0, 0, 0, 0.24);
   -webkit-app-region: no-drag;
 }
-.float-tooldock > * {
-  display: inline;
+/* 自停泊位拖出但仍在弹回范围内: 半透明, 此时松开会弹回 */
+.float-tooldock.float-tooldock--near {
+  opacity: 0.6;
 }
+/* 展开时按钮直接在底板内换行排列 */
+.float-tooldock > #custom-toolbar {
+  display: contents;
+}
+/* 底板内的按钮四周留出相同的间距 */
 #toolbar .float-tooldock .toolbar__item {
-  display: inline;
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: fill-available;
+  margin: var(--custom-dock-item-margin-width);
 }
+/* 拖拽按钮: 强调色细框 */
 #toolbar .float-tooldock .toolbar__item#custom-toolbar-more {
-  box-shadow: 0 0 2px 2px var(--custom-striking-color);
+  box-shadow: 0 0 0 1.5px var(--custom-striking-color);
 }
 /* 自定义工具栏 */
 #custom-toolbar {

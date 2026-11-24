@@ -61,6 +61,12 @@ const config = {
             classes: [ // 样式类名
                 'float-tooldock',
             ],
+            pull: { // 从停泊位拖出
+                from: 4, // 移动超过该距离才开始拖动 (px)
+                out: 48, // 松开时与按下位置的距离超过该值才算拖出, 否则弹回停泊位 (px)
+                duration: 200, // 弹回动画时长 (ms)
+                class: 'float-tooldock--near', // 仍在弹回范围内时的样式类名
+            },
             reset: { // 重置工具栏
                 enable: true,
                 id: 'custom-tooldock-reset',
@@ -69,7 +75,7 @@ const config = {
                     zh_CHT: '重置懸浮工具欄',
                     other: 'Reset the Floating Toolbar',
                 },
-                icon: '#iconRefresh',
+                icon: '#iconFullscreen', // 拖拽按钮在工具栏收起时的图标, 以反色显示 (style/module/element.css)
             },
         },
         toolbar: {
@@ -84,17 +90,17 @@ const config = {
                     fold: {
                         icon: '#iconFullscreen',
                         label: {
-                            zh_CN: '按住拖动\n双击展开扩展工具栏',
-                            zh_CHT: '按住拖動\n雙擊展開擴展工具欄',
-                            other: 'Hold Down to Drag\nDouble-click to Expand the Expansion Toolbar',
+                            zh_CN: '按住拖动\n拖出后双击展开扩展工具栏',
+                            zh_CHT: '按住拖動\n拖出後雙擊展開擴展工具欄',
+                            other: 'Hold Down to Drag\nOnce Dragged Out, Double-click to Expand the Expansion Toolbar',
                         },
                     },
                     unfold: {
                         icon: '#iconContract',
                         label: {
-                            zh_CN: '按住拖动\n双击收起扩展工具栏',
-                            zh_CHT: '按住拖動\n雙擊收起擴展工具欄',
-                            other: 'Hold Down to Drag\nDouble-click to Collapse the Expansion Toolbar',
+                            zh_CN: '按住拖动\n单击切换单列 / 多行\n双击收起扩展工具栏',
+                            zh_CHT: '按住拖動\n單擊切換單列 / 多行\n雙擊收起擴展工具欄',
+                            other: 'Hold Down to Drag\nClick to Switch Between One Column and Rows\nDouble-click to Collapse the Expansion Toolbar',
                         },
                     },
                 },
@@ -1797,8 +1803,8 @@ const custom = {
     theme: {
         toolbar: {
             [config.theme.toolbar.more.id]: {
-                default: true,
-            }, // 工具栏状态
+                default: false,
+            }, // 工具栏状态 (默认位于停泊位)
             [config.theme.location.record.toolbar.id]: { default: false }, // 当前浏览位置
             [config.theme.menu.block.toolbar.id]: { default: false }, // 块功能增强
             [config.theme.style.itemtext.toolbar.id]: { default: false }, // 完整显示文本内容
