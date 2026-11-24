@@ -1,5 +1,19 @@
 # 更改日志 | CHANGE LOG
 
+## v3.1.5-mod.1/2026-11-23
+
+- [v3.1.4-mod.1 ... v3.1.5-mod.1](https://github.com/q0wkp/siyuan-theme-dark-plus/compare/v3.1.4-mod.1...v3.1.5-mod.1)
+- 合并上游 v3.1.4, 保留本 fork 的全部改动 | Merge upstream v3.1.4, keeping all changes of this fork.
+- 最低思源版本提升至 v3.8.10 | Raise the minimum SiYuan version to v3.8.10.
+- 复制当前文档内容拆分为两个按钮: 不含引用的内容 / 含引用的内容 | Split copying the current document content into two buttons: without / with the referenced content.
+- 修复思源 v3.x 下主题文案全部显示为英文的问题 | Fix the theme's texts all showing in English on SiYuan v3.x.
+- 主题目录 `git pull` 到更新后自动重新加载窗口 (需启用 `.githooks/post-merge`) | Reload the windows automatically after a `git pull` updates the theme (enable `.githooks/post-merge`).
+- 工具栏拖出一段距离才算拖出, 否则弹回停泊位; 悬浮工具栏改为圆角底板, 原位显示反色图标; 停泊位上不再展开扩展工具栏; 展开后单击拖拽按钮在单列与多行间切换 | The toolbar counts as dragged out only beyond a distance and snaps back to its dock otherwise; the floating toolbar sits on a rounded plate, with an inverted icon left in its place; the extended toolbar no longer expands at the dock; once expanded, a click on the handle switches between one column and rows.
+- 移除 YouTube 视频时间戳生成功能及其播放器脚本 | Remove timestamp creation for YouTube videos and its player script.
+- 更换主题图标, `README.md` 新增许可与声明 | Replace the theme icon, and add the license and disclaimer sections to `README.md`.
+
+---
+
 ## v3.1.4/2026-11-12
 
 - [v3.1.3 ... v3.1.4](https://github.com/Zuoqiu-Yingyi/siyuan-theme-dark-plus/compare/v3.1.3...v3.1.4)
